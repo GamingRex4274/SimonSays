@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	grid(gfx.GetRect().GetCenter())
 {
 }
 
@@ -48,4 +49,5 @@ void Game::UpdateModel(float dt)
 
 void Game::ComposeFrame()
 {
+	grid.Draw(gfx);
 }
