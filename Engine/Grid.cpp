@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include <assert.h>
 
 Grid::Window::Window(const RectI& rect)
 	:
@@ -17,6 +18,23 @@ void Grid::Window::Draw(Graphics& gfx, Color windowColor) const
 		gfx.DrawRect(rect.GetExpanded(-padding), Colors::White);
 		break;
 	}
+}
+
+void Grid::Window::ToggleSelect()
+{
+	if (state == State::Unselected)
+	{
+		state = State::Selected;
+	}
+	else
+	{
+		state = State::Unselected;
+	}
+}
+
+bool Grid::Window::IsSelected() const
+{
+	return state == State::Selected;
 }
 
 Grid::Grid(const Vei2& center)
@@ -43,7 +61,24 @@ void Grid::Draw(Graphics& gfx)
 	}
 }
 
+void Grid::OnSelectClick(const Vei2& screenPos)
+{
+	const Vei2 gridPos = ScreenToGrid(screenPos);
+	assert(gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height);
+	WinAt(gridPos).ToggleSelect();
+}
+
+RectI Grid::GetRect() const
+{
+	return RectI(topLeft, width * windowSize, height * windowSize);
+}
+
 Grid::Window& Grid::WinAt(const Vei2& gridPos)
 {
 	return grid[gridPos.y * width + gridPos.x];
+}
+
+Vei2 Grid::ScreenToGrid(const Vei2& screenPos)
+{
+	return (screenPos - topLeft) / windowSize;
 }

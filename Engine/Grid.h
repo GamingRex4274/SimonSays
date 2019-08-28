@@ -18,6 +18,8 @@ private:
 		Window() = default;
 		Window(const RectI& rect);
 		void Draw(Graphics& gfx, Color windowColor) const;
+		void ToggleSelect();
+		bool IsSelected() const;
 	private:
 		RectI rect;
 		State state = State::Unselected;
@@ -26,8 +28,11 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
+	void OnSelectClick(const Vei2& screenPos);
+	RectI GetRect() const;
 private:
 	Window& WinAt(const Vei2& gridPos);
+	Vei2 ScreenToGrid(const Vei2& screenPos);
 private:
 	Vei2 topLeft;
 	static constexpr int width = 2; // Width and height = amount of windows on grid.

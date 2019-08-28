@@ -45,6 +45,18 @@ void Game::Go()
 
 void Game::UpdateModel(float dt)
 {
+	while (!wnd.mouse.IsEmpty())
+	{
+		const auto e = wnd.mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::LPress)
+		{
+			const Vei2 screenPos = e.GetPos();
+			if (grid.GetRect().Contains(screenPos))
+			{
+				grid.OnSelectClick(screenPos);
+			}
+		}
+	}
 }
 
 void Game::ComposeFrame()
