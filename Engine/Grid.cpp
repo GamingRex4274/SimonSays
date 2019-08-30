@@ -9,6 +9,7 @@ Grid::Window::Window(const RectI& rect)
 
 void Grid::Window::Draw(Graphics& gfx, Color windowColor) const
 {
+	// Draws a window with top-left origin.
 	switch (state)
 	{
 	case State::Unselected:
@@ -39,12 +40,13 @@ bool Grid::Window::IsSelected() const
 
 Grid::Grid(const Vei2& center)
 	:
-	topLeft(center - Vei2(width, height) * windowSize / 2)
+	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
+			// Temporary window object gets constructed and stored in reference.
 			WinAt(gridPos) = Window(RectI(gridPos * windowSize + topLeft, windowSize, windowSize));
 		}
 	}
@@ -75,6 +77,7 @@ RectI Grid::GetRect() const
 
 Grid::Window& Grid::WinAt(const Vei2& gridPos)
 {
+	// Returns index of 2D array for one window.
 	return grid[gridPos.y * width + gridPos.x];
 }
 

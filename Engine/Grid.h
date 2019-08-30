@@ -31,7 +31,7 @@ public:
 	void OnSelectClick(const Vei2& screenPos);
 	RectI GetRect() const;
 private:
-	Window& WinAt(const Vei2& gridPos);
+	Window& WinAt(const Vei2& gridPos); // Returns reference to a window on the grid.
 	Vei2 ScreenToGrid(const Vei2& screenPos);
 private:
 	Vei2 topLeft;
