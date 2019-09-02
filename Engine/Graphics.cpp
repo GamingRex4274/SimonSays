@@ -240,6 +240,54 @@ Graphics::Graphics( HWNDKey& key )
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
 }
 
+void Graphics::DrawIsoRightTriUL(int x, int y, int size, Color c)
+{
+	for (int y_loop = y; y_loop < y + size; y_loop++)
+	{
+		const int cur_line = y_loop - y;
+		for (int x_loop = x; x_loop < x + size - cur_line; x_loop++)
+		{
+			PutPixel(x_loop, y_loop, c);
+		}
+	}
+}
+
+void Graphics::DrawIsoRightTriUR(int x, int y, int size, Color c)
+{
+	for (int y_loop = y; y_loop < y + size; y_loop++)
+	{
+		const int cur_line = y_loop - y;
+		for (int x_loop = x + cur_line; x_loop < x + size; x_loop++)
+		{
+			PutPixel(x_loop, y_loop, c);
+		}
+	}
+}
+
+void Graphics::DrawIsoRightTriBL(int x, int y, int size, Color c)
+{
+	for (int y_loop = y; y_loop < y + size; y_loop++)
+	{
+		const int cur_line = y_loop - y;
+		for (int x_loop = x; x_loop < x + cur_line; x_loop++)
+		{
+			PutPixel(x_loop, y_loop, c);
+		}
+	}
+}
+
+void Graphics::DrawIsoRightTriBR(int x, int y, int size, Color c)
+{
+	for (int y_loop = y; y_loop < y + size; y_loop++)
+	{
+		const int cur_line = y_loop - y;
+		for (int x_loop = x + size - cur_line; x_loop < x + size; x_loop++)
+		{
+			PutPixel(x_loop, y_loop, c);
+		}
+	}
+}
+
 RectI Graphics::GetRect() const
 {
 	return { 0,ScreenWidth,0,ScreenHeight };

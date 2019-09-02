@@ -63,6 +63,10 @@ public:
 	{
 		DrawRect(rect.left, rect.top, rect.right, rect.bottom, c);
 	}
+	void DrawIsoRightTriUL(int x, int y, int size, Color c);
+	void DrawIsoRightTriUR(int x, int y, int size, Color c);
+	void DrawIsoRightTriBL(int x, int y, int size, Color c);
+	void DrawIsoRightTriBR(int x, int y, int size, Color c);
 	RectI GetRect() const;
 	~Graphics();
 private:
