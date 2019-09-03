@@ -7,18 +7,19 @@ Grid::Window::Window(const RectI& rect)
 {
 }
 
-void Grid::Window::Draw(Graphics& gfx, Color windowColor) const
+void Grid::Window::Draw(Graphics& gfx, Color windowColor)
 {
 	// Draws a window with top-left origin.
 	switch (state)
 	{
 	case State::Unselected:
-		gfx.DrawRect(rect.GetExpanded(-padding), windowColor);
+		bev.SetBaseColor(windowColor); // Sets color of unselected window to its assigned color.
 		break;
 	case State::Selected:
-		gfx.DrawRect(rect.GetExpanded(-padding), Colors::White);
+		bev.SetBaseColor({ 230,230,230 }); // Sets color of selected window to white.
 		break;
 	}
+	bev.DrawBeveledBrick(rect.GetExpanded(-padding), bevelSize, gfx);
 }
 
 void Grid::Window::ToggleSelect()

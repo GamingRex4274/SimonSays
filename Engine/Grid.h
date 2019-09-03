@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Vei2.h"
+#include "Beveler.h"
 
 class Grid
 {
@@ -17,13 +18,15 @@ private:
 	public:
 		Window() = default;
 		Window(const RectI& rect);
-		void Draw(Graphics& gfx, Color windowColor) const;
+		void Draw(Graphics& gfx, Color windowColor);
 		void ToggleSelect();
 		bool IsSelected() const;
 	private:
 		RectI rect;
+		Beveler bev;
 		State state = State::Unselected;
 		static constexpr int padding = 5; // Space between windows.
+		static constexpr int bevelSize = 16; // Size of shading.
 	};
 public:
 	Grid(const Vei2& center);
@@ -38,6 +41,7 @@ private:
 	static constexpr int width = 2; // Width and height = amount of windows on grid.
 	static constexpr int height = 2;
 	static constexpr int windowSize = 200; // Dimensions of each window.
-	static constexpr Color windowColors[4] = { Colors::Cyan,Colors::Yellow,Colors::Green,Colors::Magenta };
+	// Colors for each window: cyan, yellow, green and magenta.
+	static constexpr Color windowColors[4] = { {25,230,230},{230,230,25},{25,230,25},{230,25,230} };
 	Window grid[width * height];
 };
