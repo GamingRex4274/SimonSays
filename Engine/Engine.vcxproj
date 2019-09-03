@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Beveler.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Vei2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Beveler.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
