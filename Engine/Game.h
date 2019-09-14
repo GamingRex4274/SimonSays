@@ -35,9 +35,10 @@ public:
 	void Go();
 private:
 	void ComposeFrame();
-	void UpdateModel(float dt);
+	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void CountWaitTime(float dt, const Vei2& mousePos);
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -46,5 +47,10 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	Grid grid;
+	static constexpr float selectWaitTime = 1.0f;
+	float curWaitTime = 0.0f;
+	bool countingTime = false;
+	bool cooldownOn = false;
+	Vei2 mousePos;
 	/********************************/
 };

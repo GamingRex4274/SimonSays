@@ -32,28 +32,31 @@ Game::Game( MainWindow& wnd )
 void Game::Go()
 {
 	gfx.BeginFrame();
-	float elapsedTime = ft.Mark();
-	if (elapsedTime > 0.0f)
-	{
-		const float dt = std::min(0.0025f, elapsedTime);
-		UpdateModel(dt);
-		elapsedTime -= dt;
-	}
+	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel(float dt)
+void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
+
+	if (countingTime)
+	{
+		CountWaitTime(dt, mousePos);
+	}
+
 	while (!wnd.mouse.IsEmpty())
 	{
 		const auto e = wnd.mouse.Read();
-		if (e.GetType() == Mouse::Event::Type::LPress)
+		if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
 		{
-			const Vei2 screenPos = e.GetPos();
-			if (grid.GetRect().Contains(screenPos))
+			mousePos = e.GetPos();
+			if (grid.GetRect().Contains(mousePos))
 			{
-				grid.OnSelectClick(screenPos);
+				grid.OnSelectClick(mousePos);
+				countingTime = true;
+				cooldownOn = true;
 			}
 		}
 	}
@@ -62,4 +65,16 @@ void Game::UpdateModel(float dt)
 void Game::ComposeFrame()
 {
 	grid.Draw(gfx);
+}
+
+void Game::CountWaitTime(float dt, const Vei2& mousePos)
+{
+	curWaitTime += dt;
+	if (curWaitTime > selectWaitTime)
+	{
+		grid.OnSelectClick(mousePos);
+		curWaitTime = 0.0f;
+		countingTime = false;
+		cooldownOn = false;
+	}
 }
