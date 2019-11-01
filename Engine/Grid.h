@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include "Vei2.h"
 #include "Beveler.h"
+#include <random>
 
 class Grid
 {
@@ -31,6 +32,7 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
+	void RandomSelection();
 	void OnSelectClick(const Vei2& screenPos);
 	RectI GetRect() const;
 private:
@@ -44,4 +46,6 @@ private:
 	// Colors for each window: cyan, yellow, green and magenta.
 	static constexpr Color windowColors[4] = { {25,230,230},{230,230,25},{25,230,25},{230,25,230} };
 	Window grid[width * height];
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> nDist;
 };

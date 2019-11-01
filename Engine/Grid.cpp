@@ -41,7 +41,9 @@ bool Grid::Window::IsSelected() const
 
 Grid::Grid(const Vei2& center)
 	:
-	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
+	topLeft(center - Vei2(width, height) * windowSize / 2), // Center of screen.
+	rng(std::random_device()()),
+	nDist(0, width * height - 1)
 {
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{
@@ -62,6 +64,12 @@ void Grid::Draw(Graphics& gfx)
 			WinAt(gridPos).Draw(gfx, windowColors[gridPos.y * width + gridPos.x]);
 		}
 	}
+}
+
+void Grid::RandomSelection()
+{
+	const int n = nDist(rng);
+	grid[n].ToggleSelect();
 }
 
 void Grid::OnSelectClick(const Vei2& screenPos)

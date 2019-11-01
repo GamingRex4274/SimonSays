@@ -27,6 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	grid(gfx.GetRect().GetCenter())
 {
+	grid.RandomSelection();
 }
 
 void Game::Go()
