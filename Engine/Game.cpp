@@ -27,7 +27,6 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	grid(gfx.GetRect().GetCenter())
 {
-	grid.RandomSelection();
 }
 
 void Game::Go()
@@ -46,6 +45,10 @@ void Game::UpdateModel()
 	{
 		CountWaitTime(dt, mousePos);
 	}
+
+	grid.RandomSelection(cooldownOn);
+	countingTime = true;
+	cooldownOn = true;
 
 	while (!wnd.mouse.IsEmpty())
 	{
@@ -73,7 +76,6 @@ void Game::CountWaitTime(float dt, const Vei2& mousePos)
 	curWaitTime += dt;
 	if (curWaitTime > selectWaitTime)
 	{
-		grid.OnSelectClick(mousePos);
 		curWaitTime = 0.0f;
 		countingTime = false;
 		cooldownOn = false;

@@ -32,7 +32,7 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
-	void RandomSelection();
+	void RandomSelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos);
 	RectI GetRect() const;
 private:

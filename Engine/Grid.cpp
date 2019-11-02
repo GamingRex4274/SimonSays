@@ -66,10 +66,13 @@ void Grid::Draw(Graphics& gfx)
 	}
 }
 
-void Grid::RandomSelection()
+void Grid::RandomSelection(bool cooldown)
 {
-	const int n = nDist(rng);
-	grid[n].ToggleSelect();
+	if (!cooldown) // If the grid is not on cooldown, choose next random window.
+	{
+		const int n = nDist(rng);
+		grid[n].ToggleSelect();
+	}
 }
 
 void Grid::OnSelectClick(const Vei2& screenPos)
