@@ -13,10 +13,10 @@ void Grid::Window::Draw(Graphics& gfx, Color windowColor)
 	switch (state)
 	{
 	case State::Unselected:
-		bev.SetBaseColor(windowColor); // Sets color of unselected window to its assigned color.
+		bev.SetBaseColor(windowColor); // Gives unselected window its assigned color.
 		break;
 	case State::Selected:
-		bev.SetBaseColor({ 230,230,230 }); // Sets color of selected window to white.
+		bev.SetBaseColor({ 230,230,230 }); // Gives selected window a white color.
 		break;
 	}
 	bev.DrawBeveledBrick(rect.GetExpanded(-padding), bevelSize, gfx);
@@ -24,13 +24,14 @@ void Grid::Window::Draw(Graphics& gfx, Color windowColor)
 
 void Grid::Window::ToggleSelect()
 {
-	if (state == State::Unselected)
+	switch (state)
 	{
+	case State::Unselected:
 		state = State::Selected;
-	}
-	else
-	{
+		break;
+	case State::Selected:
 		state = State::Unselected;
+		break;
 	}
 }
 
@@ -70,8 +71,17 @@ void Grid::RandomSelection(bool cooldown)
 {
 	if (!cooldown) // If the grid is not on cooldown, choose next random window.
 	{
-		const int n = nDist(rng);
-		grid[n].ToggleSelect();
+		switch (randomTimes)
+		{
+		case 0:
+			rw = nDist(rng);
+			randomTimes++;
+			break;
+		case 1:
+			randomTimes--;
+			break;
+		}
+		grid[rw].ToggleSelect();
 	}
 }
 

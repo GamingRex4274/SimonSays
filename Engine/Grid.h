@@ -48,4 +48,6 @@ private:
 	Window grid[width * height];
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> nDist;
+	int randomTimes = 0;
+	int rw;
 };
