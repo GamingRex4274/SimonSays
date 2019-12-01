@@ -48,6 +48,7 @@ private:
 	Window grid[width * height];
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> nDist;
-	int randomTimes = 0;
-	int rw;
+	bool lockedOnWin = false;
+	// Indicates whether to stay on one window or to select a new window.
+	int randWin;
 };

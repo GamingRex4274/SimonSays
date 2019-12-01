@@ -71,17 +71,16 @@ void Grid::RandomSelection(bool cooldown)
 {
 	if (!cooldown) // If the grid is not on cooldown, choose next random window.
 	{
-		switch (randomTimes)
+		if (!lockedOnWin)
 		{
-		case 0:
-			rw = nDist(rng);
-			randomTimes++;
-			break;
-		case 1:
-			randomTimes--;
-			break;
+			randWin = nDist(rng);
+			lockedOnWin = true;
 		}
-		grid[rw].ToggleSelect();
+		else
+		{
+			lockedOnWin = false;
+		}
+		grid[randWin].ToggleSelect();
 	}
 }
 
