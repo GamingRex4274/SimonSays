@@ -41,14 +41,22 @@ void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
 
-	if (countingTime)
+	if (cooldownOn)
 	{
-		CountWaitTime(dt, mousePos);
+		curWaitTime += dt;
+		if (curWaitTime > selectWaitTime)
+		{
+			grid.OnSelectClick(mousePos);
+			curWaitTime = 0.0f;
+			cooldownOn = false;
+		}
 	}
 
-	grid.RandomSelection(cooldownOn);
-	countingTime = true;
-	cooldownOn = true;
+	if (timesSelected < maxRandSelect * 2)
+	{
+		grid.RandomSelection(cooldownOn, timesSelected);
+		cooldownOn = true;
+	}
 
 	while (!wnd.mouse.IsEmpty())
 	{
@@ -59,7 +67,6 @@ void Game::UpdateModel()
 			if (grid.GetRect().Contains(mousePos))
 			{
 				grid.OnSelectClick(mousePos);
-				countingTime = true;
 				cooldownOn = true;
 			}
 		}
@@ -69,15 +76,4 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	grid.Draw(gfx);
-}
-
-void Game::CountWaitTime(float dt, const Vei2& mousePos)
-{
-	curWaitTime += dt;
-	if (curWaitTime > selectWaitTime)
-	{
-		curWaitTime = 0.0f;
-		countingTime = false;
-		cooldownOn = false;
-	}
 }

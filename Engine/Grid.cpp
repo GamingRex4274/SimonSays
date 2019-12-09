@@ -67,9 +67,9 @@ void Grid::Draw(Graphics& gfx)
 	}
 }
 
-void Grid::RandomSelection(bool cooldown)
+void Grid::RandomSelection(bool cooldown, int& curRandSelect)
 {
-	if (!cooldown) // If the grid is not on cooldown, choose next random window.
+	if (!cooldown) // If the grid is not on cooldown, execute next window selection.
 	{
 		if (!lockedOnWin)
 		{
@@ -81,14 +81,17 @@ void Grid::RandomSelection(bool cooldown)
 			lockedOnWin = false;
 		}
 		grid[randWin].ToggleSelect();
+		curRandSelect++; // One new window selection has been executed.
 	}
 }
 
 void Grid::OnSelectClick(const Vei2& screenPos)
 {
 	const Vei2 gridPos = ScreenToGrid(screenPos);
-	assert(gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height);
-	WinAt(gridPos).ToggleSelect();
+	if (gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height)
+	{
+		WinAt(gridPos).ToggleSelect();
+	}
 }
 
 RectI Grid::GetRect() const
@@ -104,5 +107,6 @@ Grid::Window& Grid::WinAt(const Vei2& gridPos)
 
 Vei2 Grid::ScreenToGrid(const Vei2& screenPos)
 {
+	// Converts screen position into a grid position.
 	return (screenPos - topLeft) / windowSize;
 }

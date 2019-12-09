@@ -32,7 +32,7 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
-	void RandomSelection(bool cooldown);
+	void RandomSelection(bool cooldown, int& curRandSelect); // curRandSelect = Indicates how many selections have been executed.
 	void OnSelectClick(const Vei2& screenPos);
 	RectI GetRect() const;
 private:

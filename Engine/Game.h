@@ -38,7 +38,6 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void CountWaitTime(float dt, const Vei2& mousePos);
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -49,8 +48,9 @@ private:
 	Grid grid;
 	static constexpr float selectWaitTime = 1.0f;
 	float curWaitTime = 0.0f;
-	bool countingTime = false;
 	bool cooldownOn = false;
+	int maxRandSelect = 7;
+	int timesSelected = 0;
 	Vei2 mousePos;
 	/********************************/
 };
