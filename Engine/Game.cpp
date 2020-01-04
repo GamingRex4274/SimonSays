@@ -46,30 +46,35 @@ void Game::UpdateModel()
 		curWaitTime += dt;
 		if (curWaitTime > selectWaitTime)
 		{
-			grid.OnSelectClick(mousePos);
+			if (grid.GetState() == Grid::State::Playing)
+			{
+				grid.OnSelectClick(mousePos);
+			}
 			curWaitTime = 0.0f;
 			cooldownOn = false;
 		}
 	}
 
-	if (timesSelected < maxRandSelect * 2)
+	if (grid.GetState() == Grid::State::Playing)
 	{
-		grid.RandomSelection(cooldownOn, timesSelected);
-		cooldownOn = true;
-	}
-
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-		if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
+		while (!wnd.mouse.IsEmpty())
 		{
-			mousePos = e.GetPos();
-			if (grid.GetRect().Contains(mousePos))
+			const auto e = wnd.mouse.Read();
+			if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
 			{
-				grid.OnSelectClick(mousePos);
-				cooldownOn = true;
+				mousePos = e.GetPos();
+				if (grid.GetRect().Contains(mousePos))
+				{
+					grid.OnSelectClick(mousePos);
+					cooldownOn = true;
+				}
 			}
 		}
+	}
+	else if (grid.GetState() == Grid::State::Waiting)
+	{
+		grid.RandomSelection(cooldownOn);
+		cooldownOn = true;
 	}
 }
 

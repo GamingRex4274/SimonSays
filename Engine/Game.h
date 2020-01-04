@@ -49,8 +49,6 @@ private:
 	static constexpr float selectWaitTime = 1.0f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
-	int maxRandSelect = 7;
-	int timesSelected = 0;
 	Vei2 mousePos;
 	/********************************/
 };
