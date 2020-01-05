@@ -46,7 +46,7 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	Grid grid;
-	static constexpr float selectWaitTime = 1.0f;
+	static constexpr float selectWaitTime = 0.5f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
 	Vei2 mousePos;

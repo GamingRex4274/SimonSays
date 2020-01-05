@@ -39,8 +39,9 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
+	void ResetWindows();
 	void RandomSelection(bool cooldown);
-	void OnSelectClick(const Vei2& screenPos);
+	void OnSelectClick(const Vei2& screenPos, bool cooldown);
 	RectI GetRect() const;
 	State GetState() const;
 private:
@@ -54,7 +55,7 @@ private:
 	static constexpr int windowSize = 200; // Dimensions of each window.
 	Vei2 topLeft;
 	Window grid[width * height];
-	State state = State::Playing;
+	State state = State::Waiting;
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> nDist;
 	int randWin;

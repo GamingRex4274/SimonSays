@@ -46,10 +46,7 @@ void Game::UpdateModel()
 		curWaitTime += dt;
 		if (curWaitTime > selectWaitTime)
 		{
-			if (grid.GetState() == Grid::State::Playing)
-			{
-				grid.OnSelectClick(mousePos);
-			}
+			grid.ResetWindows();
 			curWaitTime = 0.0f;
 			cooldownOn = false;
 		}
@@ -65,7 +62,7 @@ void Game::UpdateModel()
 				mousePos = e.GetPos();
 				if (grid.GetRect().Contains(mousePos))
 				{
-					grid.OnSelectClick(mousePos);
+					grid.OnSelectClick(mousePos, cooldownOn);
 					cooldownOn = true;
 				}
 			}
