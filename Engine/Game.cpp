@@ -27,6 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	grid(gfx.GetRect().GetCenter())
 {
+	grid.ResetMemory();
 }
 
 void Game::Go()
@@ -57,7 +58,7 @@ void Game::UpdateModel()
 		while (!wnd.mouse.IsEmpty())
 		{
 			const auto e = wnd.mouse.Read();
-			if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
+			if (e.GetType() == Mouse::Event::Type::LPress)
 			{
 				mousePos = e.GetPos();
 				if (grid.GetRect().Contains(mousePos))
@@ -70,7 +71,7 @@ void Game::UpdateModel()
 	}
 	else if (grid.GetState() == Grid::State::Waiting)
 	{
-		grid.RandomSelection(cooldownOn);
+		grid.MemorySelection(cooldownOn);
 		cooldownOn = true;
 	}
 }

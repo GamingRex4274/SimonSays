@@ -39,8 +39,9 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
+	void ResetMemory();
 	void ResetWindows();
-	void RandomSelection(bool cooldown);
+	void MemorySelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos, bool cooldown);
 	RectI GetRect() const;
 	State GetState() const;
@@ -53,11 +54,12 @@ private:
 	static constexpr int width = 2; // Width and height = amount of windows on grid.
 	static constexpr int height = 2;
 	static constexpr int windowSize = 200; // Dimensions of each window.
+	static constexpr int nMaxRounds = 15;
 	Vei2 topLeft;
 	Window grid[width * height];
 	State state = State::Waiting;
-	std::mt19937 rng;
-	std::uniform_int_distribution<int> nDist;
+	int* curMemWindows = nullptr;
+	int curRound = 0;
 	int randWin;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.
 };

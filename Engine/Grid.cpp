@@ -42,9 +42,7 @@ bool Grid::Window::IsSelected() const
 
 Grid::Grid(const Vei2& center)
 	:
-	topLeft(center - Vei2(width, height) * windowSize / 2), // Center of screen.
-	rng(std::random_device()()),
-	nDist(0, width * height - 1)
+	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{
@@ -67,6 +65,22 @@ void Grid::Draw(Graphics& gfx)
 	}
 }
 
+void Grid::ResetMemory()
+{
+	assert(curRound < nMaxRounds);
+	delete[] curMemWindows;
+	curMemWindows = new int[curRound + 2];
+	int* pWindows = curMemWindows;
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> nDist(0, width * height - 1);
+	for (int n = 0; n < curRound + 1; pWindows++, n++)
+	{
+		*pWindows = nDist(rng);
+	}
+	*pWindows = -1;
+}
+
 void Grid::ResetWindows()
 {
 	for (Window& w : grid)
@@ -79,15 +93,22 @@ void Grid::ResetWindows()
 	}
 }
 
-void Grid::RandomSelection(bool cooldown)
+void Grid::MemorySelection(bool cooldown)
 {
 	if (!cooldown) // If the grid is not on cooldown, execute next window selection.
 	{
 		if (!lockedOnWin)
 		{
-			randWin = nDist(rng);
-			grid[randWin].ToggleSelect();
-			lockedOnWin = true;
+			if (*curMemWindows != -1)
+			{
+				grid[*curMemWindows].ToggleSelect();
+				curMemWindows++;
+				lockedOnWin = true;
+			}
+			else
+			{
+				state = State::Playing;
+			}
 		}
 		else
 		{
