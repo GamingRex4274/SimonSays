@@ -43,9 +43,12 @@ public:
 	void ResetWindows();
 	void MemorySelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos, bool cooldown);
+	void ProcessSelection(const Vei2& gridPos);
 	RectI GetRect() const;
 	State GetState() const;
 private:
+	void FreeMemory();
+	void CreateMemory();
 	Window& WinAt(const Vei2& gridPos); // Returns reference to a window on the grid.
 	Vei2 ScreenToGrid(const Vei2& screenPos);
 private:
@@ -59,6 +62,7 @@ private:
 	Window grid[width * height];
 	State state = State::Waiting;
 	int* curMemWindows = nullptr;
+	int ptrIndex = 0;
 	int curRound = 0;
 	int randWin;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.
