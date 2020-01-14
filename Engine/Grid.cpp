@@ -67,11 +67,18 @@ void Grid::Draw(Graphics& gfx)
 
 void Grid::ResetMemory()
 {
-	if (curMemWindows != nullptr)
+	assert(curRound < nMaxRounds);
+	delete[] curMemWindows;
+	curMemWindows = new int[curRound + 2];
+	int* pWindows = curMemWindows;
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> nDist(0, width * height - 1);
+	for (int n = 0; n < curRound + 1; pWindows++, n++)
 	{
-		FreeMemory();
+		*pWindows = nDist(rng);
 	}
-	CreateMemory();
+	*pWindows = -1;
 }
 
 void Grid::ResetWindows()
@@ -92,14 +99,14 @@ void Grid::MemorySelection(bool cooldown)
 	{
 		if (!lockedOnWin)
 		{
-			if (ptrIndex <= curRound)
+			if (*curMemWindows != -1)
 			{
-				grid[curMemWindows[ptrIndex++]].ToggleSelect();
+				grid[*curMemWindows].ToggleSelect();
+				curMemWindows++;
 				lockedOnWin = true;
 			}
 			else
 			{
-				ptrIndex = 0;
 				state = State::Playing;
 			}
 		}
@@ -117,29 +124,6 @@ void Grid::OnSelectClick(const Vei2& screenPos, bool cooldown)
 		const Vei2 gridPos = ScreenToGrid(screenPos);
 		assert(gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height);
 		WinAt(gridPos).ToggleSelect();
-		ProcessSelection(gridPos);
-	}
-}
-
-void Grid::ProcessSelection(const Vei2& gridPos)
-{
-	if (ptrIndex <= curRound)
-	{
-		if ((gridPos.y * width + gridPos.x) == curMemWindows[ptrIndex])
-		{
-			ptrIndex++;
-		}
-		else
-		{
-			state = State::GameOver;
-		}
-	}
-	else
-	{
-		ptrIndex = 0;
-		curRound++;
-		ResetMemory();
-		state = State::Waiting;
 	}
 }
 
@@ -151,25 +135,6 @@ RectI Grid::GetRect() const
 Grid::State Grid::GetState() const
 {
 	return state;
-}
-
-void Grid::FreeMemory()
-{
-	delete[] curMemWindows;
-	curMemWindows = nullptr;
-}
-
-void Grid::CreateMemory()
-{
-	assert(curRound < nMaxRounds);
-	curMemWindows = new int[curRound + 1];
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> nDist(0, width * height - 1);
-	for (int i = 0; i <= curRound; i++)
-	{
-		curMemWindows[i] = nDist(rng);
-	}
 }
 
 Grid::Window& Grid::WinAt(const Vei2& gridPos)
