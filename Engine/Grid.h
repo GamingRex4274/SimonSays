@@ -4,6 +4,7 @@
 #include "Vei2.h"
 #include "Beveler.h"
 #include <random>
+#include <vector>
 
 class Grid
 {
@@ -39,13 +40,15 @@ private:
 public:
 	Grid(const Vei2& center);
 	void Draw(Graphics& gfx);
-	void ResetMemory();
+	void AddWndToPtrn();
 	void ResetWindows();
-	void MemorySelection(bool cooldown);
+	void ShowPtrnSelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos, bool cooldown);
 	RectI GetRect() const;
 	State GetState() const;
 private:
+	void ProcessSelection(const Vei2& gridPos);
+	int GetWndNum(const Vei2& gridPos) const;
 	Window& WinAt(const Vei2& gridPos); // Returns reference to a window on the grid.
 	Vei2 ScreenToGrid(const Vei2& screenPos);
 private:
@@ -58,7 +61,8 @@ private:
 	Vei2 topLeft;
 	Window grid[width * height];
 	State state = State::Waiting;
-	int* curMemWindows = nullptr;
+	std::vector<int> wndPattern;
+	int ptrnIndex = 0;
 	int curRound = 0;
 	int randWin;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.

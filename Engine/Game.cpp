@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	grid(gfx.GetRect().GetCenter())
 {
-	grid.ResetMemory();
+	grid.AddWndToPtrn();
 }
 
 void Game::Go()
@@ -71,7 +71,7 @@ void Game::UpdateModel()
 	}
 	else if (grid.GetState() == Grid::State::Waiting)
 	{
-		grid.MemorySelection(cooldownOn);
+		grid.ShowPtrnSelection(cooldownOn);
 		cooldownOn = true;
 	}
 }

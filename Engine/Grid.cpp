@@ -65,20 +65,13 @@ void Grid::Draw(Graphics& gfx)
 	}
 }
 
-void Grid::ResetMemory()
+void Grid::AddWndToPtrn()
 {
 	assert(curRound < nMaxRounds);
-	delete[] curMemWindows;
-	curMemWindows = new int[curRound + 2];
-	int* pWindows = curMemWindows;
 	std::random_device rd;
 	std::mt19937 rng(rd());
 	std::uniform_int_distribution<int> nDist(0, width * height - 1);
-	for (int n = 0; n < curRound + 1; pWindows++, n++)
-	{
-		*pWindows = nDist(rng);
-	}
-	*pWindows = -1;
+	wndPattern.push_back(nDist(rng));
 }
 
 void Grid::ResetWindows()
@@ -93,20 +86,21 @@ void Grid::ResetWindows()
 	}
 }
 
-void Grid::MemorySelection(bool cooldown)
+void Grid::ShowPtrnSelection(bool cooldown)
 {
+	assert(!wndPattern.empty());
 	if (!cooldown) // If the grid is not on cooldown, execute next window selection.
 	{
 		if (!lockedOnWin)
 		{
-			if (*curMemWindows != -1)
+			if (ptrnIndex <= curRound)
 			{
-				grid[*curMemWindows].ToggleSelect();
-				curMemWindows++;
+				grid[wndPattern[ptrnIndex++]].ToggleSelect();
 				lockedOnWin = true;
 			}
 			else
 			{
+				ptrnIndex = 0;
 				state = State::Playing;
 			}
 		}
@@ -124,6 +118,7 @@ void Grid::OnSelectClick(const Vei2& screenPos, bool cooldown)
 		const Vei2 gridPos = ScreenToGrid(screenPos);
 		assert(gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height);
 		WinAt(gridPos).ToggleSelect();
+		ProcessSelection(gridPos);
 	}
 }
 
@@ -135,6 +130,32 @@ RectI Grid::GetRect() const
 Grid::State Grid::GetState() const
 {
 	return state;
+}
+
+void Grid::ProcessSelection(const Vei2& gridPos)
+{
+	assert(!wndPattern.empty());
+	ptrnIndex++;
+	if (ptrnIndex <= curRound)
+	{
+		if (GetWndNum(gridPos) != wndPattern[ptrnIndex - 1])
+		{
+			state = State::GameOver;
+		}
+	}
+	else
+	{
+		ptrnIndex = 0;
+		curRound++;
+		AddWndToPtrn();
+		state = State::Waiting;
+	}
+}
+
+int Grid::GetWndNum(const Vei2& gridPos) const
+{
+	// Returns value of window at a certain gridPos.
+	return gridPos.y * width + gridPos.x;
 }
 
 Grid::Window& Grid::WinAt(const Vei2& gridPos)
