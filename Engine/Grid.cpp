@@ -149,7 +149,7 @@ void Grid::ProcessSelection(const Vei2& gridPos)
 		curRound++;
 		AddWndToPtrn();
 		state = State::Waiting;
-		lockedOnWin = true;
+		lockedOnWin = true; // Adds short delay before showing new pattern.
 	}
 }
 
