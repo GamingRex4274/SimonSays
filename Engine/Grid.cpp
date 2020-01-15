@@ -135,21 +135,24 @@ Grid::State Grid::GetState() const
 void Grid::ProcessSelection(const Vei2& gridPos)
 {
 	assert(!wndPattern.empty());
-	ptrnIndex++;
 	if (ptrnIndex <= curRound)
 	{
-		if (GetWndNum(gridPos) != wndPattern[ptrnIndex - 1])
+		if (GetWndNum(gridPos) == wndPattern[ptrnIndex])
+		{
+			ptrnIndex++;
+			if (ptrnIndex > curRound)
+			{
+				ptrnIndex = 0;
+				curRound++;
+				AddWndToPtrn();
+				state = State::Waiting;
+				lockedOnWin = true; // Adds short delay before showing new pattern.
+			}
+		}
+		else
 		{
 			state = State::GameOver;
 		}
-	}
-	else
-	{
-		ptrnIndex = 0;
-		curRound++;
-		AddWndToPtrn();
-		state = State::Waiting;
-		lockedOnWin = true; // Adds short delay before showing new pattern.
 	}
 }
 

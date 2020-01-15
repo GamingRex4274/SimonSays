@@ -42,37 +42,40 @@ void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
 
-	if (cooldownOn)
+	if (grid.GetState() != Grid::State::GameOver)
 	{
-		curWaitTime += dt;
-		if (curWaitTime > selectWaitTime)
+		if (cooldownOn)
 		{
-			grid.ResetWindows();
-			curWaitTime = 0.0f;
-			cooldownOn = false;
-		}
-	}
-
-	if (grid.GetState() == Grid::State::Playing)
-	{
-		while (!wnd.mouse.IsEmpty())
-		{
-			const auto e = wnd.mouse.Read();
-			if (e.GetType() == Mouse::Event::Type::LPress)
+			curWaitTime += dt;
+			if (curWaitTime > selectWaitTime)
 			{
-				mousePos = e.GetPos();
-				if (grid.GetRect().Contains(mousePos))
+				grid.ResetWindows();
+				curWaitTime = 0.0f;
+				cooldownOn = false;
+			}
+		}
+
+		if (grid.GetState() == Grid::State::Playing)
+		{
+			while (!wnd.mouse.IsEmpty())
+			{
+				const auto e = wnd.mouse.Read();
+				if (e.GetType() == Mouse::Event::Type::LPress)
 				{
-					grid.OnSelectClick(mousePos, cooldownOn);
-					cooldownOn = true;
+					mousePos = e.GetPos();
+					if (grid.GetRect().Contains(mousePos))
+					{
+						grid.OnSelectClick(mousePos, cooldownOn);
+						cooldownOn = true;
+					}
 				}
 			}
 		}
-	}
-	else if (grid.GetState() == Grid::State::Waiting)
-	{
-		grid.ShowPtrnSelection(cooldownOn);
-		cooldownOn = true;
+		else if (grid.GetState() == Grid::State::Waiting)
+		{
+			grid.ShowPtrnSelection(cooldownOn);
+			cooldownOn = true;
+		}
 	}
 }
 
