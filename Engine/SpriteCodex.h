@@ -12,5 +12,7 @@ public:
 public:
 	static constexpr int waitTxtWidth = 378;
 	static constexpr int playTxtWidth = 160;
-	static constexpr int txtHeight = 60;
+	static constexpr int waitAndPlayTxtHeight = 60;
+	static constexpr int gameOverTxtWidth = 250;
+	static constexpr int gameOverTxtHeight = 40;
 };

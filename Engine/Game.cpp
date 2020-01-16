@@ -85,10 +85,13 @@ void Game::ComposeFrame()
 	switch (grid.GetState())
 	{
 	case Grid::State::Waiting:
-		SpriteCodex::DrawWaitText(Vei2(Graphics::ScreenWidth - SpriteCodex::waitTxtWidth, SpriteCodex::txtHeight) / 2, gfx);
+		SpriteCodex::DrawWaitText(Vei2(Graphics::ScreenWidth - SpriteCodex::waitTxtWidth, SpriteCodex::waitAndPlayTxtHeight) / 2, gfx);
 		break;
 	case Grid::State::Playing:
-		SpriteCodex::DrawPlayRptTxt(Vei2(Graphics::ScreenWidth - SpriteCodex::playTxtWidth, SpriteCodex::txtHeight) / 2, gfx);
+		SpriteCodex::DrawPlayRptTxt(Vei2(Graphics::ScreenWidth - SpriteCodex::playTxtWidth, SpriteCodex::waitAndPlayTxtHeight) / 2, gfx);
+		break;
+	case Grid::State::GameOver:
+		SpriteCodex::DrawGameOver(Vei2(Graphics::ScreenWidth - SpriteCodex::gameOverTxtWidth, SpriteCodex::gameOverTxtHeight) / 2, gfx);
 		break;
 	}
 	grid.Draw(gfx);
