@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "SpriteCodex.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -81,5 +82,14 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	switch (grid.GetState())
+	{
+	case Grid::State::Waiting:
+		SpriteCodex::DrawWaitText(Vei2(Graphics::ScreenWidth - SpriteCodex::waitTxtWidth, SpriteCodex::txtHeight) / 2, gfx);
+		break;
+	case Grid::State::Playing:
+		SpriteCodex::DrawPlayRptTxt(Vei2(Graphics::ScreenWidth - SpriteCodex::playTxtWidth, SpriteCodex::txtHeight) / 2, gfx);
+		break;
+	}
 	grid.Draw(gfx);
 }
