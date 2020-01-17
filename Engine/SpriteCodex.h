@@ -9,10 +9,14 @@ public:
 	static void DrawWaitText(const Vei2& topLeft, Graphics& gfx);
 	static void DrawPlayRptTxt(const Vei2& topLeft, Graphics& gfx);
 	static void DrawGameOver(const Vei2& topLeft, Graphics& gfx);
+	static void DrawRoundHeader(const Vei2& topLeft, Graphics& gfx);
 public:
 	static constexpr int waitTxtWidth = 378;
 	static constexpr int playTxtWidth = 160;
 	static constexpr int waitAndPlayTxtHeight = 60;
 	static constexpr int gameOverTxtWidth = 250;
 	static constexpr int gameOverTxtHeight = 40;
+	static constexpr int rndHeaderWidth = 123;
+	static constexpr int rndHeaderHeight = 15;
+	static constexpr int rndHeaderOffset = 50;
 };

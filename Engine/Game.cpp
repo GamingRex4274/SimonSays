@@ -92,6 +92,8 @@ void Game::ComposeFrame()
 		break;
 	case Grid::State::GameOver:
 		SpriteCodex::DrawGameOver(Vei2(Graphics::ScreenWidth - SpriteCodex::gameOverTxtWidth, SpriteCodex::gameOverTxtHeight) / 2, gfx);
+		SpriteCodex::DrawRoundHeader(Vei2((Graphics::ScreenWidth - SpriteCodex::rndHeaderWidth - SpriteCodex::rndHeaderOffset) / 2,
+			SpriteCodex::gameOverTxtHeight + SpriteCodex::rndHeaderHeight * 2), gfx);
 		break;
 	}
 	grid.Draw(gfx);
