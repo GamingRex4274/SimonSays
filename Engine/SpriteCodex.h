@@ -6,11 +6,11 @@
 class SpriteCodex
 {
 public:
-	static void DrawWaitText(const Vei2& topLeft, Graphics& gfx); // 378x60
-	static void DrawPlayRptTxt(const Vei2& topLeft, Graphics& gfx); // 160x60
-	static void DrawGameOver(const Vei2& topLeft, Graphics& gfx); // 250x40
-	static void DrawRoundHeader(const Vei2& topLeft, Graphics& gfx); // 123x15
-	static void DrawNum(Vei2& topLeft, Graphics& gfx, int n); // All numbers: 9x14
+	static void DrawWaitText(Graphics& gfx); // 378x60
+	static void DrawPlayRptTxt(Graphics& gfx); // 160x60
+	static void DrawGameOver(Graphics& gfx); // 250x40
+	static void DrawRoundHeader(Graphics& gfx); // 123x15
+	static void DrawNum(int n, Graphics& gfx); // All numbers: 9x14
 private:
 	static void DrawNum0(const Vei2& topLeft, Graphics& gfx);
 	static void DrawNum1(const Vei2& topLeft, Graphics& gfx);
@@ -22,7 +22,7 @@ private:
 	static void DrawNum7(const Vei2& topLeft, Graphics& gfx);
 	static void DrawNum8(const Vei2& topLeft, Graphics& gfx);
 	static void DrawNum9(const Vei2& topLeft, Graphics& gfx);
-public:
+private:
 	static constexpr int waitTxtWidth = 378;
 	static constexpr int playTxtWidth = 160;
 	static constexpr int waitAndPlayTxtHeight = 60;
@@ -33,6 +33,5 @@ public:
 	static constexpr int rndHeaderOffset = 50;
 	static constexpr int numWidth = 9;
 	static constexpr int numHeight = 14;
-private:
 	static constexpr int numPadding = 9;
 };

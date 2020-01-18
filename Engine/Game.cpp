@@ -85,17 +85,15 @@ void Game::ComposeFrame()
 	switch (grid.GetState())
 	{
 	case Grid::State::Waiting:
-		SpriteCodex::DrawWaitText(Vei2(Graphics::ScreenWidth - SpriteCodex::waitTxtWidth, SpriteCodex::waitAndPlayTxtHeight) / 2, gfx);
+		SpriteCodex::DrawWaitText(gfx);
 		break;
 	case Grid::State::Playing:
-		SpriteCodex::DrawPlayRptTxt(Vei2(Graphics::ScreenWidth - SpriteCodex::playTxtWidth, SpriteCodex::waitAndPlayTxtHeight) / 2, gfx);
+		SpriteCodex::DrawPlayRptTxt(gfx);
 		break;
 	case Grid::State::GameOver:
-		SpriteCodex::DrawGameOver(Vei2(Graphics::ScreenWidth - SpriteCodex::gameOverTxtWidth, SpriteCodex::gameOverTxtHeight) / 2, gfx);
-		SpriteCodex::DrawRoundHeader(Vei2((Graphics::ScreenWidth - SpriteCodex::rndHeaderWidth - SpriteCodex::rndHeaderOffset) / 2,
-			SpriteCodex::gameOverTxtHeight + SpriteCodex::rndHeaderHeight * 2), gfx);
-		SpriteCodex::DrawNum(Vei2((Graphics::ScreenWidth + SpriteCodex::rndHeaderWidth) / 2,
-			SpriteCodex::gameOverTxtHeight + SpriteCodex::rndHeaderHeight * 2), gfx, grid.GetCurrentRound());
+		SpriteCodex::DrawGameOver(gfx);
+		SpriteCodex::DrawRoundHeader(gfx);
+		SpriteCodex::DrawNum(grid.GetCurrentRound(), gfx);
 		break;
 	}
 	grid.Draw(gfx);

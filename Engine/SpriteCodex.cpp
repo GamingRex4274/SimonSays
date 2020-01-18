@@ -2,8 +2,9 @@
 #include <vector>
 #include <assert.h>
 
-void SpriteCodex::DrawWaitText(const Vei2& topLeft, Graphics& gfx)
+void SpriteCodex::DrawWaitText(Graphics& gfx)
 {
+	const Vei2 topLeft = Vei2(Graphics::ScreenWidth - waitTxtWidth, waitAndPlayTxtHeight) / 2;
 	const int x = topLeft.x;
 	const int y = topLeft.y;
 
@@ -3657,8 +3658,9 @@ void SpriteCodex::DrawWaitText(const Vei2& topLeft, Graphics& gfx)
 	gfx.PutPixel(306 + x, 54 + y, 0, 95, 121);
 }
 
-void SpriteCodex::DrawPlayRptTxt(const Vei2& topLeft, Graphics& gfx)
+void SpriteCodex::DrawPlayRptTxt(Graphics& gfx)
 {
+	const Vei2 topLeft = Vei2(Graphics::ScreenWidth - playTxtWidth, waitAndPlayTxtHeight) / 2;
 	const int x = topLeft.x;
 	const int y = topLeft.y;
 
@@ -5725,8 +5727,9 @@ void SpriteCodex::DrawPlayRptTxt(const Vei2& topLeft, Graphics& gfx)
 	gfx.PutPixel(158 + x, 44 + y, 80, 0, 0);
 }
 
-void SpriteCodex::DrawGameOver(const Vei2& topLeft, Graphics& gfx)
+void SpriteCodex::DrawGameOver(Graphics& gfx)
 {
+	const Vei2 topLeft = Vei2(Graphics::ScreenWidth - gameOverTxtWidth, gameOverTxtHeight) / 2;
 	const int x = topLeft.x;
 	const int y = topLeft.y;
 
@@ -9409,8 +9412,9 @@ void SpriteCodex::DrawGameOver(const Vei2& topLeft, Graphics& gfx)
 	gfx.PutPixel(245 + x, 35 + y, 255, 255, 255);
 }
 
-void SpriteCodex::DrawRoundHeader(const Vei2& topLeft, Graphics& gfx)
+void SpriteCodex::DrawRoundHeader(Graphics& gfx)
 {
+	const Vei2 topLeft((Graphics::ScreenWidth - rndHeaderWidth - rndHeaderOffset) / 2, gameOverTxtHeight + rndHeaderHeight * 2);
 	const int x = topLeft.x;
 	const int y = topLeft.y;
 
@@ -10095,10 +10099,11 @@ void SpriteCodex::DrawRoundHeader(const Vei2& topLeft, Graphics& gfx)
 	gfx.PutPixel(121 + x, 13 + y, 144, 144, 144);
 }
 
-void SpriteCodex::DrawNum(Vei2& topLeft, Graphics& gfx, int n)
+void SpriteCodex::DrawNum(int n, Graphics& gfx)
 {
 	assert(n >= 0);
 
+	Vei2 topLeft((Graphics::ScreenWidth + rndHeaderWidth) / 2, gameOverTxtHeight + rndHeaderHeight * 2);
 	std::vector<int> valDigits;
 	int val = n;
 	do
