@@ -122,6 +122,11 @@ void Grid::OnSelectClick(const Vei2& screenPos, bool cooldown)
 	}
 }
 
+int Grid::GetCurrentRound() const
+{
+	return curRound;
+}
+
 RectI Grid::GetRect() const
 {
 	return RectI(topLeft, width * windowSize, height * windowSize);

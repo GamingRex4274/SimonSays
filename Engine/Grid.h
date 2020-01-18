@@ -44,6 +44,7 @@ public:
 	void ResetWindows();
 	void ShowPtrnSelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos, bool cooldown);
+	int GetCurrentRound() const;
 	RectI GetRect() const;
 	State GetState() const;
 private:
