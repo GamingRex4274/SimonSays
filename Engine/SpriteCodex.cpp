@@ -1,4 +1,5 @@
 #include "SpriteCodex.h"
+#include <vector>
 #include <assert.h>
 
 void SpriteCodex::DrawWaitText(const Vei2& topLeft, Graphics& gfx)
@@ -10094,41 +10095,55 @@ void SpriteCodex::DrawRoundHeader(const Vei2& topLeft, Graphics& gfx)
 	gfx.PutPixel(121 + x, 13 + y, 144, 144, 144);
 }
 
-void SpriteCodex::DrawNum(const Vei2& topLeft, Graphics& gfx, int n)
+void SpriteCodex::DrawNum(Vei2& topLeft, Graphics& gfx, int n)
 {
-	assert(n >= 0 && n <= 9);
-	switch (n)
+	assert(n >= 0);
+
+	std::vector<int> valDigits;
+	int val = n;
+	do
 	{
-	case 0:
-		DrawNum0(topLeft, gfx);
-		break;
-	case 1:
-		DrawNum1(topLeft, gfx);
-		break;
-	case 2:
-		DrawNum2(topLeft, gfx);
-		break;
-	case 3:
-		DrawNum3(topLeft, gfx);
-		break;
-	case 4:
-		DrawNum4(topLeft, gfx);
-		break;
-	case 5:
-		DrawNum5(topLeft, gfx);
-		break;
-	case 6:
-		DrawNum6(topLeft, gfx);
-		break;
-	case 7:
-		DrawNum7(topLeft, gfx);
-		break;
-	case 8:
-		DrawNum8(topLeft, gfx);
-		break;
-	case 9:
-		DrawNum9(topLeft, gfx);
-		break;
+		valDigits.push_back(val % 10);
+		val /= 10;
+	} while (val > 0);
+
+	while (!valDigits.empty())
+	{
+		switch (valDigits.back())
+		{
+		case 0:
+			DrawNum0(topLeft, gfx);
+			break;
+		case 1:
+			DrawNum1(topLeft, gfx);
+			break;
+		case 2:
+			DrawNum2(topLeft, gfx);
+			break;
+		case 3:
+			DrawNum3(topLeft, gfx);
+			break;
+		case 4:
+			DrawNum4(topLeft, gfx);
+			break;
+		case 5:
+			DrawNum5(topLeft, gfx);
+			break;
+		case 6:
+			DrawNum6(topLeft, gfx);
+			break;
+		case 7:
+			DrawNum7(topLeft, gfx);
+			break;
+		case 8:
+			DrawNum8(topLeft, gfx);
+			break;
+		case 9:
+			DrawNum9(topLeft, gfx);
+			break;
+		}
+		valDigits.pop_back();
+		topLeft += Vei2(numPadding, 0);
 	}
 }
 

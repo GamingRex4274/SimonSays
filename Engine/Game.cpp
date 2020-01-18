@@ -99,5 +99,4 @@ void Game::ComposeFrame()
 		break;
 	}
 	grid.Draw(gfx);
-	SpriteCodex::DrawNum(Vei2(660, 550), gfx, 9);
 }
