@@ -30,7 +30,7 @@ private:
 	static constexpr int gameOverTxtHeight = 40;
 	static constexpr int rndHeaderWidth = 123;
 	static constexpr int rndHeaderHeight = 15;
-	static constexpr int rndHeaderOffset = 50;
+	static constexpr int rndHeaderOffset = 20;
 	static constexpr int numWidth = 9;
 	static constexpr int numHeight = 14;
 	static constexpr int numPadding = 9;
