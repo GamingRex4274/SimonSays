@@ -65,6 +65,5 @@ private:
 	std::vector<int> wndPattern;
 	int ptrnIndex = 0;
 	int curRound = 0;
-	int randWin;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.
 };
