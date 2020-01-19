@@ -27,7 +27,7 @@ private:
 	public:
 		Window() = default;
 		Window(const RectI& rect);
-		void Draw(Graphics& gfx, Color windowColor);
+		void Draw(Graphics& gfx, Color windowColor, Grid::State gridState);
 		void ToggleSelect();
 		bool IsSelected() const;
 	private:

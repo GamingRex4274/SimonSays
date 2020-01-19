@@ -7,17 +7,32 @@ Grid::Window::Window(const RectI& rect)
 {
 }
 
-void Grid::Window::Draw(Graphics& gfx, Color windowColor)
+void Grid::Window::Draw(Graphics& gfx, Color windowColor, Grid::State gridState)
 {
 	// Draws a window with top-left origin.
-	switch (state)
+	if (gridState != Grid::State::GameOver)
 	{
-	case State::Unselected:
-		bev.SetBaseColor(windowColor); // Gives unselected window its assigned color.
-		break;
-	case State::Selected:
-		bev.SetBaseColor({ 230,230,230 }); // Gives selected window a white color.
-		break;
+		switch (state)
+		{
+		case State::Unselected:
+			bev.SetBaseColor(windowColor); // Gives unselected window its assigned color.
+			break;
+		case State::Selected:
+			bev.SetBaseColor({ 230,230,230 }); // Gives selected window a white color.
+			break;
+		}
+	}
+	else // Windows are drawn with a different color if the game is over.
+	{
+		switch (state)
+		{
+		case State::Unselected:
+			bev.SetBaseColor({ 230,230,230 }); // Gives unselected window a white color.
+			break;
+		case State::Selected:
+			bev.SetBaseColor({ 230,25,25 }); // Gives selected window a red color.
+			break;
+		}
 	}
 	bev.DrawBeveledBrick(rect.GetExpanded(-padding), bevelSize, gfx);
 }
@@ -60,7 +75,7 @@ void Grid::Draw(Graphics& gfx)
 	{
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
-			WinAt(gridPos).Draw(gfx, windowColors[gridPos.y * width + gridPos.x]);
+			WinAt(gridPos).Draw(gfx, windowColors[gridPos.y * width + gridPos.x], state);
 		}
 	}
 }
