@@ -53,11 +53,14 @@ void Game::UpdateModel()
 				grid.ResetWindows();
 				curWaitTime = 0.0f;
 				cooldownOn = false;
+				showingWaitText = true;
 			}
 		}
 
 		if (grid.GetState() == Grid::State::Playing)
 		{
+			showingWaitText = false;
+
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
@@ -85,7 +88,10 @@ void Game::ComposeFrame()
 	switch (grid.GetState())
 	{
 	case Grid::State::Waiting:
-		SpriteCodex::DrawWaitText(gfx);
+		if (showingWaitText)
+		{
+			SpriteCodex::DrawWaitText(gfx);
+		}
 		break;
 	case Grid::State::Playing:
 		SpriteCodex::DrawPlayRptTxt(gfx);

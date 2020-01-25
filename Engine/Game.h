@@ -49,6 +49,7 @@ private:
 	static constexpr float selectWaitTime = 0.5f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
+	bool showingWaitText = true;
 	Vei2 mousePos;
 	/********************************/
 };
