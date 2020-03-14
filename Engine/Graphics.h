@@ -25,7 +25,6 @@
 #include "ChiliException.h"
 #include "Colors.h"
 #include "RectI.h"
-#include "Surface.h"
 
 class Graphics
 {
@@ -68,15 +67,6 @@ public:
 	void DrawIsoRightTriUR(int x, int y, int size, Color c);
 	void DrawIsoRightTriBL(int x, int y, int size, Color c);
 	void DrawIsoRightTriBR(int x, int y, int size, Color c);
-	void DrawSpriteNonChroma(int x, int y, const Surface& s);
-	void DrawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
-	void DrawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
-	void DrawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteSubstitute(int x, int y, Color substitute, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteSubstitute(int x, int y, Color substitute, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
 	RectI GetRect() const;
 	~Graphics();
 private:
