@@ -15,6 +15,8 @@ public:
 	static RectI FromCenter(const Vei2& center, int halfWidth, int halfHeight); // Creates rectangle with center origin.
 	RectI GetExpanded(int offset) const; // Gets an expanded version of a rect.
 	Vei2 GetCenter() const;
+	int GetWidth() const;
+	int GetHeight() const;
 public:
 	int left;
 	int right;
