@@ -31,6 +31,16 @@ void Font::DrawText(const std::string& text, const Vei2& pos, Color color, Graph
 	}
 }
 
+int Font::GetGlyphWidth() const
+{
+	return glyphWidth;
+}
+
+int Font::GetGlyphHeight() const
+{
+	return glyphHeight;
+}
+
 RectI Font::MapGlyphRect(char c) const
 {
 	assert(c >= firstChar && c <= lastChar);

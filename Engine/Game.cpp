@@ -81,6 +81,11 @@ void Game::UpdateModel()
 			cooldownOn = true;
 		}
 	}
+	else
+	{
+		const std::string score = std::to_string(grid.GetCurrentRound());
+		finalTally = roundHeaderTxt + score;
+	}
 }
 
 void Game::ComposeFrame()
@@ -90,16 +95,15 @@ void Game::ComposeFrame()
 	case Grid::State::Waiting:
 		if (showingWaitText)
 		{
-			SpriteCodex::DrawWaitText(gfx);
+			bigFont.DrawText(waitTxt, Vei2((Graphics::ScreenWidth - (int(waitTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), { 0,135,255 }, gfx);
 		}
 		break;
 	case Grid::State::Playing:
-		SpriteCodex::DrawPlayRptTxt(gfx);
+		bigFont.DrawText(repeatTxt, Vei2((Graphics::ScreenWidth - (int(repeatTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), Colors::Red, gfx);
 		break;
 	case Grid::State::GameOver:
-		SpriteCodex::DrawGameOver(gfx);
-		SpriteCodex::DrawRoundHeader(gfx);
-		SpriteCodex::DrawNum(grid.GetCurrentRound(), gfx);
+		boldFont.DrawText(gameOverTxt, Vei2((Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4), Colors::White, gfx);
+		smallFont.DrawText(finalTally, Vei2((Graphics::ScreenWidth - (int(finalTally.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
 		break;
 	}
 	grid.Draw(gfx);

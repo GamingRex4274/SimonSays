@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "FrameTimer.h"
 #include "Grid.h"
+#include "Font.h"
 
 class Game
 {
@@ -51,5 +52,13 @@ private:
 	bool cooldownOn = false;
 	bool showingWaitText = true;
 	Vei2 mousePos;
+	Font boldFont = "Fonts\\DejaVuSansMonoBold28x54.bmp";
+	Font bigFont = "Fonts\\DejaVuSansMono28x54.bmp";
+	Font smallFont = "Fonts\\DejaVuSansMono11x22.bmp";
+	const std::string waitTxt = "Watch carefully...";
+	const std::string repeatTxt = "REPEAT!";
+	const std::string gameOverTxt = "GAME OVER";
+	const std::string roundHeaderTxt = "Rounds beaten: ";
+	std::string finalTally;
 	/********************************/
 };

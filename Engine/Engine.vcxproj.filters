@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fonts">
+      <UniqueIdentifier>{ef193b22-1604-41cc-ae7c-1fa7a79beacc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -151,6 +154,30 @@
   <ItemGroup>
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Fonts\Consolas11x21.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\Consolas25x47.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\ConsolasBold11x21.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\ConsolasBold25x47.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\DejaVuSansMono11x22.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\DejaVuSansMono28x54.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\DejaVuSansMonoBold11x22.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\DejaVuSansMonoBold28x54.bmp">
+      <Filter>Fonts</Filter>
     </Image>
   </ItemGroup>
 </Project>
