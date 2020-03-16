@@ -55,10 +55,14 @@ private:
 	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
 	Font bigFont = "Fonts\\Consolas27x50.bmp";
 	Font smallFont = "Fonts\\Consolas11x21.bmp";
+	const std::string titleTxt = "SIMON SAYS!";
+	const std::string promptTxt = "Press ENTER";
+	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";
 	const std::string gameOverTxt = "GAME OVER";
 	const std::string roundHeaderTxt = "Rounds beaten: ";
 	std::string finalTally;
+	bool onTitleScreen = true;
 	/********************************/
 };
