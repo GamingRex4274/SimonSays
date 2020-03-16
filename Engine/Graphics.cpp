@@ -520,8 +520,13 @@ void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRec
 			const Color srcPixel = s.GetPixel(sx, sy);
 			if (srcPixel != chroma)
 			{
-				// use substitute color instead of color from the surface (if not chroma)
-				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, substitute);
+				const Color newColor = {
+					unsigned char(((255 - float(srcPixel.GetR())) / 255) * substitute.GetR()),
+					unsigned char(((255 - float(srcPixel.GetG())) / 255) * substitute.GetG()),
+					unsigned char(((255 - float(srcPixel.GetB())) / 255) * substitute.GetB())
+				};
+
+				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, newColor);
 			}
 		}
 	}
