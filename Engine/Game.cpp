@@ -20,7 +20,6 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
-#include "SpriteCodex.h"
 
 Game::Game( MainWindow& wnd )
 	:
