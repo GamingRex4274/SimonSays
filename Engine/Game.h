@@ -52,9 +52,9 @@ private:
 	bool cooldownOn = false;
 	bool showingWaitText = true;
 	Vei2 mousePos;
-	Font boldFont = "Fonts\\DejaVuSansMonoBold28x54.bmp";
-	Font bigFont = "Fonts\\DejaVuSansMono28x54.bmp";
-	Font smallFont = "Fonts\\DejaVuSansMono11x22.bmp";
+	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
+	Font bigFont = "Fonts\\Consolas27x50.bmp";
+	Font smallFont = "Fonts\\Consolas11x21.bmp";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";
 	const std::string gameOverTxt = "GAME OVER";

@@ -245,9 +245,9 @@
   <ItemGroup>
     <Image Include="Chili.ico" />
     <Image Include="Fonts\Consolas11x21.bmp" />
-    <Image Include="Fonts\Consolas25x47.bmp" />
+    <Image Include="Fonts\Consolas27x50.bmp" />
     <Image Include="Fonts\ConsolasBold11x21.bmp" />
-    <Image Include="Fonts\ConsolasBold25x47.bmp" />
+    <Image Include="Fonts\ConsolasBold27x50.bmp" />
     <Image Include="Fonts\DejaVuSansMono11x22.bmp" />
     <Image Include="Fonts\DejaVuSansMono28x54.bmp" />
     <Image Include="Fonts\DejaVuSansMonoBold11x22.bmp" />

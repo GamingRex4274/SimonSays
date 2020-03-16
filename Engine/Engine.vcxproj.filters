@@ -155,18 +155,6 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Fonts\Consolas11x21.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\Consolas25x47.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\ConsolasBold11x21.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\ConsolasBold25x47.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
     <Image Include="Fonts\DejaVuSansMono11x22.bmp">
       <Filter>Fonts</Filter>
     </Image>
@@ -177,6 +165,18 @@
       <Filter>Fonts</Filter>
     </Image>
     <Image Include="Fonts\DejaVuSansMonoBold28x54.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\Consolas11x21.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\Consolas27x50.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\ConsolasBold11x21.bmp">
+      <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Fonts\ConsolasBold27x50.bmp">
       <Filter>Fonts</Filter>
     </Image>
   </ItemGroup>
