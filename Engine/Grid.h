@@ -26,19 +26,22 @@ private:
 		};
 	public:
 		Window() = default;
-		Window(const RectI& rect);
-		void Draw(Graphics& gfx, Color windowColor, Grid::State gridState);
+		Window(const RectI& rect, Color color);
+		void Draw(Graphics& gfx, int bevelSize, Grid::State gridState);
 		void ToggleSelect();
 		bool IsSelected() const;
 	private:
+		Color color;
 		RectI rect;
 		Beveler bev;
 		State state = State::Unselected;
 		static constexpr int padding = 5; // Space between windows.
-		static constexpr int bevelSize = 16; // Size of shading.
 	};
 public:
-	Grid(const Vei2& center);
+	Grid(const Vei2& center, int width, int height);
+	~Grid();
+	Grid(const Grid&) = delete;
+	Grid& operator=(const Grid&) = delete;
 	void Draw(Graphics& gfx);
 	void AddWndToPtrn();
 	void ResetWindows();
@@ -53,17 +56,36 @@ private:
 	Window& WinAt(const Vei2& gridPos); // Returns reference to a window on the grid.
 	Vei2 ScreenToGrid(const Vei2& screenPos);
 private:
-	// Colors for each window: cyan, yellow, green and magenta.
-	static constexpr Color windowColors[4] = { {25,230,230},{230,230,25},{25,230,25},{230,25,230} };
-	static constexpr int width = 2; // Width and height = amount of windows on grid.
-	static constexpr int height = 2;
-	static constexpr int windowSize = 200; // Dimensions of each window.
+	int width; // Width and height = amount of windows on grid.
+	int height;
+	int windowSize; // Dimensions of each window.
+	int wndBevelSize; // Size of shading.
 	static constexpr int nMaxRounds = 15;
 	Vei2 topLeft;
-	Window grid[width * height];
+	Window* grid = nullptr;
 	State state = State::Waiting;
 	std::vector<int> wndPattern;
 	int ptrnIndex = 0;
 	int curRound = 0;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.
+	static constexpr int nWndColors = 16;
+	// Colors of each window.
+	static constexpr Color windowColors[nWndColors] = {
+		{25, 230, 25},	 // Lime
+		{230, 25, 25},	 // Red
+		{230, 230, 25},  // Yellow
+		{25, 25, 230},	 // Blue
+		{230, 135, 25},  // Orange
+		{135, 25, 230},  // Purple
+		{25, 230, 230},  // Cyan
+		{230, 25, 230},	 // Magenta
+		{100, 50, 0},    // Brown
+		{230, 135, 230}, // Pink
+		{25, 135, 25},	 // Green
+		{25, 135, 135},  // Teal
+		{135, 25, 25},   // Maroon
+		{105, 105, 105}, // Dark Gray
+		{25, 25, 135},   // Navy
+		{230, 205, 25}	 // Gold
+	};
 };

@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	grid(gfx.GetRect().GetCenter())
+	grid(gfx.GetRect().GetCenter(), 3, 3)
 {
 	grid.AddWndToPtrn();
 }

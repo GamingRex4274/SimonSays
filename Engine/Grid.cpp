@@ -1,13 +1,14 @@
 #include "Grid.h"
 #include <assert.h>
 
-Grid::Window::Window(const RectI& rect)
+Grid::Window::Window(const RectI& rect, Color color)
 	:
-	rect(rect)
+	rect(rect),
+	color(color)
 {
 }
 
-void Grid::Window::Draw(Graphics& gfx, Color windowColor, Grid::State gridState)
+void Grid::Window::Draw(Graphics& gfx, int bevelSize, Grid::State gridState)
 {
 	// Draws a window with top-left origin.
 	if (gridState != Grid::State::GameOver)
@@ -15,7 +16,7 @@ void Grid::Window::Draw(Graphics& gfx, Color windowColor, Grid::State gridState)
 		switch (state)
 		{
 		case State::Unselected:
-			bev.SetBaseColor(windowColor); // Gives unselected window its assigned color.
+			bev.SetBaseColor(color); // Gives unselected window its assigned color.
 			break;
 		case State::Selected:
 			bev.SetBaseColor({ 230,230,230 }); // Gives selected window a white color.
@@ -55,8 +56,13 @@ bool Grid::Window::IsSelected() const
 	return state == State::Selected;
 }
 
-Grid::Grid(const Vei2& center)
+Grid::Grid(const Vei2& center, int width, int height)
 	:
+	width(width),
+	height(height),
+	windowSize((200 / width) + (200 / height)),
+	wndBevelSize(windowSize / 16),
+	grid(new Window[width * height]),
 	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
@@ -64,9 +70,15 @@ Grid::Grid(const Vei2& center)
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
 			// Temporary window object gets constructed and stored in reference.
-			WinAt(gridPos) = Window(RectI(gridPos * windowSize + topLeft, windowSize, windowSize));
+			WinAt(gridPos) = Window(RectI(gridPos * windowSize + topLeft, windowSize, windowSize), windowColors[GetWndNum(gridPos)]);
 		}
 	}
+}
+
+Grid::~Grid()
+{
+	delete[] grid;
+	grid = nullptr;
 }
 
 void Grid::Draw(Graphics& gfx)
@@ -75,7 +87,7 @@ void Grid::Draw(Graphics& gfx)
 	{
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
-			WinAt(gridPos).Draw(gfx, windowColors[gridPos.y * width + gridPos.x], state);
+			WinAt(gridPos).Draw(gfx, wndBevelSize, state);
 		}
 	}
 }
@@ -91,11 +103,12 @@ void Grid::AddWndToPtrn()
 
 void Grid::ResetWindows()
 {
-	for (Window& w : grid)
+	const int nWindows = width * height;
+	for (int i = 0; i < nWindows; i++)
 	{
-		if (w.IsSelected())
+		if (grid[i].IsSelected())
 		{
-			w.ToggleSelect();
+			grid[i].ToggleSelect();
 			break; // Stop checking remaining windows if one selected window has been found.
 		}
 	}
