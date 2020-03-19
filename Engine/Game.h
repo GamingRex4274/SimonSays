@@ -32,6 +32,7 @@ class Game
 {
 public:
 	Game( class MainWindow& wnd );
+	~Game();
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
@@ -40,6 +41,8 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void CreateGrid(int width, int height);
+	void DestroyGrid();
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -47,7 +50,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Grid grid;
+	Grid* pGrid = nullptr;
 	static constexpr float selectWaitTime = 0.5f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
@@ -58,7 +61,6 @@ private:
 	Font smallFont = "Fonts\\Consolas11x21.bmp";
 	SelectionMenu menu = { {300, 300}, boldFont };
 	const std::string titleTxt = "SIMON SAYS!";
-	const std::string promptTxt = "Press ENTER";
 	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";

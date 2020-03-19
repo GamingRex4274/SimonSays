@@ -24,10 +24,13 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd ),
-	grid(gfx.GetRect().GetCenter(), 3, 3)
+	gfx( wnd )
 {
-	grid.AddWndToPtrn();
+}
+
+Game::~Game()
+{
+	DestroyGrid();
 }
 
 void Game::Go()
@@ -44,21 +47,21 @@ void Game::UpdateModel()
 
 	if (!onTitleScreen)
 	{
-		if (grid.GetState() != Grid::State::GameOver)
+		if (pGrid->GetState() != Grid::State::GameOver)
 		{
 			if (cooldownOn)
 			{
 				curWaitTime += dt;
 				if (curWaitTime > selectWaitTime)
 				{
-					grid.ResetWindows();
+					pGrid->ResetWindows();
 					curWaitTime = 0.0f;
 					cooldownOn = false;
 					showingWaitText = true;
 				}
 			}
 
-			if (grid.GetState() == Grid::State::Playing)
+			if (pGrid->GetState() == Grid::State::Playing)
 			{
 				showingWaitText = false;
 
@@ -68,40 +71,69 @@ void Game::UpdateModel()
 					if (e.GetType() == Mouse::Event::Type::LPress)
 					{
 						mousePos = e.GetPos();
-						if (grid.GetRect().Contains(mousePos))
+						if (pGrid->GetRect().Contains(mousePos))
 						{
-							grid.OnSelectClick(mousePos, cooldownOn);
+							pGrid->OnSelectClick(mousePos, cooldownOn);
 							cooldownOn = true;
 						}
 					}
 				}
 			}
-			else if (grid.GetState() == Grid::State::Waiting)
+			else if (pGrid->GetState() == Grid::State::Waiting)
 			{
-				grid.ShowPtrnSelection(cooldownOn);
+				pGrid->ShowPtrnSelection(cooldownOn);
 				cooldownOn = true;
 			}
 		}
 		else
 		{
-			const std::string score = std::to_string(grid.GetCurrentRound());
+			const std::string score = std::to_string(pGrid->GetCurrentRound());
 			finalTally = roundHeaderTxt + score;
 		}
 	}
 	else
 	{
-		if (wnd.kbd.KeyIsPressed(VK_RETURN))
+		while (!wnd.mouse.IsEmpty())
 		{
-			onTitleScreen = false;
+			const auto e = wnd.mouse.Read();
+
+			const SelectionMenu::Size s = menu.ProcessMouse(e);
+			switch (s)
+			{
+			case SelectionMenu::Size::Small:
+				CreateGrid(2, 2);
+				onTitleScreen = false;
+				break;
+			case SelectionMenu::Size::Medium:
+				CreateGrid(3, 3);
+				onTitleScreen = false;
+				break;
+			case SelectionMenu::Size::Large:
+				CreateGrid(4, 4);
+				onTitleScreen = false;
+				break;
+			}
 		}
 	}
+}
+
+void Game::CreateGrid(int width, int height)
+{
+	pGrid = new Grid(gfx.GetRect().GetCenter(), width, height);
+	pGrid->AddWndToPtrn();
+}
+
+void Game::DestroyGrid()
+{
+	delete pGrid;
+	pGrid = nullptr;
 }
 
 void Game::ComposeFrame()
 {
 	if (!onTitleScreen)
 	{
-		switch (grid.GetState())
+		switch (pGrid->GetState())
 		{
 		case Grid::State::Waiting:
 			if (showingWaitText)
@@ -118,12 +150,11 @@ void Game::ComposeFrame()
 			break;
 		}
 
-		grid.Draw(gfx);
+		pGrid->Draw(gfx);
 	}
 	else
 	{
 		boldFont.DrawText(titleTxt, Vei2((Graphics::ScreenWidth - (int(titleTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
-		bigFont.DrawText(promptTxt, Vei2((Graphics::ScreenWidth - (int(promptTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 6), Colors::White, gfx);
 		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight()), Colors::White, gfx);
 		menu.Draw(gfx);
 	}

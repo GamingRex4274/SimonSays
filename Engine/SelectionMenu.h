@@ -3,6 +3,7 @@
 #include "RectI.h"
 #include "Font.h"
 #include <vector>
+#include "Mouse.h"
 
 class SelectionMenu
 {
@@ -21,6 +22,11 @@ private:
 	public:
 		Entry(const RectI& rect, const Font& font, const std::string& text, Size s);
 		void Draw(Graphics& gfx) const;
+		void SetHighlight();
+		void ResetHighlight();
+		Size GetSize() const;
+		bool IsHighlighted() const;
+		bool IsHit(const Vei2& point) const;
 	private:
 		Size s;
 		RectI rect;
@@ -33,8 +39,10 @@ private:
 public:
 	SelectionMenu(const Vei2& pos, const Font& font);
 	void Draw(Graphics& gfx) const;
+	Size ProcessMouse(const Mouse::Event& e);
 private:
 	std::string EnumToStr(Size size);
+	void ResetHighlights();
 private:
 	std::vector<Entry> entries;
 	static constexpr int verticalSpace = 20;
