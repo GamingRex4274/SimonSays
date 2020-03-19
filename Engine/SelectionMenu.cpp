@@ -91,6 +91,7 @@ SelectionMenu::Size SelectionMenu::ProcessMouse(const Mouse::Event& e)
 		{
 			if (n.IsHit(e.GetPos()))
 			{
+				ResetHighlights();
 				return n.GetSize();
 			}
 		}
