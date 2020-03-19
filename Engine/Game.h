@@ -59,14 +59,16 @@ private:
 	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
 	Font bigFont = "Fonts\\Consolas27x50.bmp";
 	Font smallFont = "Fonts\\Consolas11x21.bmp";
-	SelectionMenu menu = { {300, 300}, boldFont };
-	const std::string titleTxt = "SIMON SAYS!";
+	const std::string titleTxt = "SUPER SIMON!";
+	const std::string prompt1Txt = "Choose grid size.";
 	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";
 	const std::string gameOverTxt = "GAME OVER";
-	const std::string roundHeaderTxt = "Rounds beaten: ";
+	const std::string roundHeaderTxt = "Score: ";
+	const std::string prompt2Txt = "LEFT-CLICK to return to title screen.";
 	std::string finalTally;
+	SelectionMenu menu = { Vei2((Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6), boldFont };
 	bool onTitleScreen = true;
 	/********************************/
 };

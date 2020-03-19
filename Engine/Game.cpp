@@ -89,6 +89,19 @@ void Game::UpdateModel()
 		{
 			const std::string score = std::to_string(pGrid->GetCurrentRound());
 			finalTally = roundHeaderTxt + score;
+
+			while (!wnd.mouse.IsEmpty())
+			{
+				const auto e = wnd.mouse.Read();
+				if (e.GetType() == Mouse::Event::Type::LPress)
+				{
+					DestroyGrid();
+					curWaitTime = 0.0f;
+					cooldownOn = false;
+					showingWaitText = true;
+					onTitleScreen = true;
+				}
+			}
 		}
 	}
 	else
@@ -147,6 +160,7 @@ void Game::ComposeFrame()
 		case Grid::State::GameOver:
 			boldFont.DrawText(gameOverTxt, Vei2((Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4), Colors::White, gfx);
 			smallFont.DrawText(finalTally, Vei2((Graphics::ScreenWidth - (int(finalTally.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
+			smallFont.DrawText(prompt2Txt, Vei2((Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
 			break;
 		}
 
@@ -155,7 +169,8 @@ void Game::ComposeFrame()
 	else
 	{
 		boldFont.DrawText(titleTxt, Vei2((Graphics::ScreenWidth - (int(titleTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
-		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight()), Colors::White, gfx);
+		smallFont.DrawText(prompt1Txt, Vei2((Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5), Colors::Red, gfx);
+		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::White, gfx);
 		menu.Draw(gfx);
 	}
 }
