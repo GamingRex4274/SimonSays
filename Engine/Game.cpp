@@ -125,5 +125,6 @@ void Game::ComposeFrame()
 		boldFont.DrawText(titleTxt, Vei2((Graphics::ScreenWidth - (int(titleTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
 		bigFont.DrawText(promptTxt, Vei2((Graphics::ScreenWidth - (int(promptTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 6), Colors::White, gfx);
 		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight()), Colors::White, gfx);
+		menu.Draw(gfx);
 	}
 }
