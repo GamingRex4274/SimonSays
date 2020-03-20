@@ -11,12 +11,15 @@ SelectionMenu::Entry::Entry(const RectI& rect, const Font& font, const std::stri
 
 void SelectionMenu::Entry::Draw(Graphics& gfx) const
 {
+	const int fontWidth = font.GetGlyphWidth();
+	const int fontHeight = font.GetGlyphHeight();
+
 	if (highlighted)
 	{
 		gfx.DrawRect(rect.GetExpanded(highlightThickness), highlightColor);
 	}
 	gfx.DrawRect(rect, Colors::Black);
-	font.DrawText(text, { rect.left, rect.top }, Colors::White, gfx);
+	font.DrawText(text, rect.GetCenter() - Vei2(int(text.size()) * fontWidth, fontHeight) / 2, Colors::White, gfx);
 }
 
 void SelectionMenu::Entry::SetHighlight()
@@ -46,15 +49,28 @@ bool SelectionMenu::Entry::IsHit(const Vei2& point) const
 
 SelectionMenu::SelectionMenu(const Vei2& pos, const Font& font)
 {
+	std::vector<std::string> strings;
+	strings.reserve(int(Size::Count));
+
+	int longestStrSize = 0;
+	for (int i = 0; i < int(Size::Count); i++)
+	{
+		strings.push_back(EnumToStr(Size(i)));
+		if (longestStrSize < int(strings[i].size()))
+		{
+			longestStrSize = int(strings[i].size());
+		}
+	}
+
 	const int fontWidth = font.GetGlyphWidth();
 	const int fontHeight = font.GetGlyphHeight();
 
-	entries.reserve(int(Size::Count));
 	Vei2 curPos = pos;
+	entries.reserve(int(Size::Count));
+
 	for (int i = 0; i < int(Size::Count); i++)
 	{
-		const std::string str = EnumToStr(Size(i));
-		entries.emplace_back(RectI(Vei2(curPos.x, curPos.y + (i * fontHeight)), int(str.size()) * fontWidth, fontHeight), font, str, Size(i));
+		entries.emplace_back(RectI(Vei2(curPos.x, curPos.y + (i * fontHeight)), longestStrSize * fontWidth, fontHeight), font, strings[i], Size(i));
 		curPos.y += verticalSpace;
 	}
 }
