@@ -150,9 +150,9 @@ void Grid::OnSelectClick(const Vei2& screenPos, bool cooldown)
 	}
 }
 
-int Grid::GetCurrentRound() const
+int Grid::GetScore() const
 {
-	return curRound;
+	return score;
 }
 
 RectI Grid::GetRect() const
@@ -173,8 +173,10 @@ void Grid::ProcessSelection(const Vei2& gridPos)
 		if (GetWndNum(gridPos) == wndPattern[ptrnIndex])
 		{
 			ptrnIndex++;
+			score += 5;
 			if (ptrnIndex > curRound)
 			{
+				score += 10 * (width + height) / 2;
 				ptrnIndex = 0;
 				curRound++;
 				AddWndToPtrn();

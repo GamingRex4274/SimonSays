@@ -47,7 +47,7 @@ public:
 	void ResetWindows();
 	void ShowPtrnSelection(bool cooldown);
 	void OnSelectClick(const Vei2& screenPos, bool cooldown);
-	int GetCurrentRound() const;
+	int GetScore() const;
 	RectI GetRect() const;
 	State GetState() const;
 private:
@@ -67,6 +67,7 @@ private:
 	std::vector<int> wndPattern;
 	int ptrnIndex = 0;
 	int curRound = 0;
+	int score = 0;
 	bool lockedOnWin = false; // Indicates whether to stay on one window or to select a new window.
 	static constexpr int nWndColors = 16;
 	// Colors of each window.

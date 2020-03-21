@@ -49,6 +49,9 @@ void Game::UpdateModel()
 	{
 		if (pGrid->GetState() != Grid::State::GameOver)
 		{
+			const std::string score = std::to_string(pGrid->GetScore());
+			fullScore = roundHeaderTxt + score;
+
 			if (cooldownOn)
 			{
 				curWaitTime += dt;
@@ -87,9 +90,6 @@ void Game::UpdateModel()
 		}
 		else
 		{
-			const std::string score = std::to_string(pGrid->GetCurrentRound());
-			finalTally = roundHeaderTxt + score;
-
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
@@ -153,13 +153,15 @@ void Game::ComposeFrame()
 			{
 				bigFont.DrawText(waitTxt, Vei2((Graphics::ScreenWidth - (int(waitTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), { 0,135,255 }, gfx);
 			}
+			smallFont.DrawText(fullScore, { 0, 0 }, Colors::White, gfx);
 			break;
 		case Grid::State::Playing:
 			bigFont.DrawText(repeatTxt, Vei2((Graphics::ScreenWidth - (int(repeatTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), Colors::Red, gfx);
+			smallFont.DrawText(fullScore, { 0, 0 }, Colors::White, gfx);
 			break;
 		case Grid::State::GameOver:
 			boldFont.DrawText(gameOverTxt, Vei2((Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4), Colors::White, gfx);
-			smallFont.DrawText(finalTally, Vei2((Graphics::ScreenWidth - (int(finalTally.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
+			smallFont.DrawText(fullScore, Vei2((Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
 			smallFont.DrawText(prompt2Txt, Vei2((Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
 			break;
 		}
