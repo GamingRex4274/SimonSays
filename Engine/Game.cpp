@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <fstream>
 
 Game::Game( MainWindow& wnd )
 	:
@@ -90,6 +91,13 @@ void Game::UpdateModel()
 		}
 		else
 		{
+			if (highScore < pGrid->GetScore())
+			{
+				highScore = pGrid->GetScore();
+				std::ofstream bestScore("score.dat", std::ios::binary);
+				bestScore.write(reinterpret_cast<char*>(&highScore), sizeof(highScore));
+			}
+
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
@@ -106,6 +114,16 @@ void Game::UpdateModel()
 	}
 	else
 	{
+		std::ifstream inBestScore("score.dat", std::ios::binary);
+		if (inBestScore)
+		{
+			inBestScore.read(reinterpret_cast<char*>(&highScore), sizeof(highScore));
+		}
+		else
+		{
+			highScore = 0;
+		}
+
 		while (!wnd.mouse.IsEmpty())
 		{
 			const auto e = wnd.mouse.Read();
@@ -173,6 +191,7 @@ void Game::ComposeFrame()
 		boldFont.DrawText(titleTxt, Vei2((Graphics::ScreenWidth - (int(titleTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
 		smallFont.DrawText(prompt1Txt, Vei2((Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5), Colors::Red, gfx);
 		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::White, gfx);
+		smallFont.DrawText(highScoreTxt + std::to_string(highScore), { 0, 0 }, Colors::White, gfx);
 		menu.Draw(gfx);
 	}
 }

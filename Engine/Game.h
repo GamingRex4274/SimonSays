@@ -51,6 +51,7 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	Grid* pGrid = nullptr;
+	int highScore = 0;
 	static constexpr float selectWaitTime = 0.5f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
@@ -62,6 +63,7 @@ private:
 	const std::string titleTxt = "SUPER SIMON!";
 	const std::string prompt1Txt = "Choose grid size.";
 	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
+	const std::string highScoreTxt = "Highest Score: ";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";
 	const std::string gameOverTxt = "GAME OVER";
