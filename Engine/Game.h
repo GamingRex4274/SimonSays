@@ -57,11 +57,11 @@ private:
 	bool cooldownOn = false;
 	bool showingWaitText = true;
 	Vei2 mousePos;
+	const Surface title = "Sprites\\SuperSimonTitle263x89.bmp";
 	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
 	Font bigFont = "Fonts\\Consolas27x50.bmp";
 	Font smallFont = "Fonts\\Consolas11x21.bmp";
-	const std::string titleTxt = "SUPER SIMON!";
-	const std::string prompt1Txt = "Choose grid size.";
+	const std::string prompt1Txt = "Choose grid size:";
 	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
 	const std::string highScoreTxt = "Highest Score: ";
 	const std::string waitTxt = "Watch carefully...";

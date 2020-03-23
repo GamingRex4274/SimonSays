@@ -19,6 +19,9 @@
     <Filter Include="Fonts">
       <UniqueIdentifier>{ef193b22-1604-41cc-ae7c-1fa7a79beacc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{b3110114-e7f7-4301-9dd4-79b6d0ad6df9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -178,6 +181,9 @@
     </Image>
     <Image Include="Fonts\ConsolasBold27x50.bmp">
       <Filter>Fonts</Filter>
+    </Image>
+    <Image Include="Sprites\SuperSimonTitle263x89.bmp">
+      <Filter>Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
