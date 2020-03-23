@@ -185,5 +185,8 @@
     <Image Include="Sprites\SuperSimonTitle263x89.bmp">
       <Filter>Sprites</Filter>
     </Image>
+    <Image Include="Sprites\SuperSimonIcon48x48.ico">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
