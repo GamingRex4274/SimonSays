@@ -22,6 +22,9 @@
     <Filter Include="Sprites">
       <UniqueIdentifier>{b3110114-e7f7-4301-9dd4-79b6d0ad6df9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{64ec860c-62bf-4b6c-ab26-b60d48cd715c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -188,5 +191,10 @@
     <Image Include="Sprites\SuperSimonIcon48x48.ico">
       <Filter>Sprites</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\title.wav">
+      <Filter>Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

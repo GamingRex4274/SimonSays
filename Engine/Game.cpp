@@ -25,7 +25,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	sndTitle(L"Sounds\\title.wav", 1.567f, 12.522f)
 {
 }
 
@@ -114,6 +115,12 @@ void Game::UpdateModel()
 	}
 	else
 	{
+		if (!soundPlaying)
+		{
+			sndTitle.Play();
+			soundPlaying = true;
+		}
+
 		std::ifstream inBestScore("score.dat", std::ios::binary);
 		if (inBestScore)
 		{

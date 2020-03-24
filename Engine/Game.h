@@ -27,6 +27,7 @@
 #include "Grid.h"
 #include "Font.h"
 #include "SelectionMenu.h"
+#include "Sound.h"
 
 class Game
 {
@@ -49,6 +50,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Sound sndTitle;
 	FrameTimer ft;
 	Grid* pGrid = nullptr;
 	int highScore = 0;
@@ -72,5 +74,6 @@ private:
 	std::string fullScore;
 	SelectionMenu menu = { Vei2((Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6), boldFont };
 	bool onTitleScreen = true;
+	bool soundPlaying = false;
 	/********************************/
 };

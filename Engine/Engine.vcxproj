@@ -255,6 +255,9 @@
     <Image Include="Sprites\SuperSimonIcon48x48.ico" />
     <Image Include="Sprites\SuperSimonTitle263x89.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\title.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
