@@ -49,6 +49,12 @@ void Game::UpdateModel()
 
 	if (!onTitleScreen)
 	{
+		if (soundPlaying)
+		{
+			sndTitle.StopAll();
+			soundPlaying = false;
+		}
+
 		if (pGrid->GetState() != Grid::State::GameOver)
 		{
 			const std::string score = std::to_string(pGrid->GetScore());
