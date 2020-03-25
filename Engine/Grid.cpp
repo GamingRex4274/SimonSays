@@ -1,10 +1,11 @@
 #include "Grid.h"
 #include <assert.h>
 
-Grid::Window::Window(const RectI& rect, Color color)
+Grid::Window::Window(const RectI& rect, Color color, float sndPitch)
 	:
 	rect(rect),
-	color(color)
+	color(color),
+	sndPitch(sndPitch)
 {
 }
 
@@ -44,6 +45,7 @@ void Grid::Window::ToggleSelect()
 	{
 	case State::Unselected:
 		state = State::Selected;
+		sndSelect.Play(sndPitch);
 		break;
 	case State::Selected:
 		state = State::Unselected;
@@ -65,12 +67,14 @@ Grid::Grid(const Vei2& center, int width, int height)
 	grid(new Window[width * height]),
 	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
+	float sndPitch = 0.84f;
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
 			// Temporary window object gets constructed and stored in reference.
-			WinAt(gridPos) = Window(RectI(gridPos * windowSize + topLeft, windowSize, windowSize), windowColors[GetWndNum(gridPos)]);
+			WinAt(gridPos) = Window(RectI(gridPos * windowSize + topLeft, windowSize, windowSize), windowColors[GetWndNum(gridPos)], sndPitch);
+			sndPitch *= 1.06f;
 		}
 	}
 }

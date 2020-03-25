@@ -5,6 +5,7 @@
 #include "Beveler.h"
 #include <random>
 #include <vector>
+#include "Sound.h"
 
 class Grid
 {
@@ -26,7 +27,7 @@ private:
 		};
 	public:
 		Window() = default;
-		Window(const RectI& rect, Color color);
+		Window(const RectI& rect, Color color, float sndPitch);
 		void Draw(Graphics& gfx, int bevelSize, Grid::State gridState);
 		void ToggleSelect();
 		bool IsSelected() const;
@@ -35,6 +36,8 @@ private:
 		RectI rect;
 		Beveler bev;
 		State state = State::Unselected;
+		Sound sndSelect = L"Sounds\\window.wav";
+		float sndPitch;
 		static constexpr int padding = 5; // Space between windows.
 	};
 public:
