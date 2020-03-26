@@ -60,6 +60,7 @@ private:
 	bool showingWaitText = true;
 	Vei2 mousePos;
 	const Surface title = "Sprites\\SuperSimonTitle263x89.bmp";
+	const Surface victory = "Sprites\\Victory411x301.bmp";
 	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
 	Font bigFont = "Fonts\\Consolas27x50.bmp";
 	Font smallFont = "Fonts\\Consolas11x21.bmp";

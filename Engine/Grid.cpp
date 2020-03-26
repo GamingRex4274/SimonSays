@@ -181,11 +181,17 @@ void Grid::ProcessSelection(const Vei2& gridPos)
 			if (ptrnIndex > curRound)
 			{
 				score += 10 * (width + height) / 2;
-				ptrnIndex = 0;
-				curRound++;
-				AddWndToPtrn();
-				state = State::Waiting;
-				lockedOnWin = true; // Adds short delay before showing new pattern.
+				if (++curRound >= nMaxRounds)
+				{
+					state = State::Win;
+				}
+				else
+				{
+					ptrnIndex = 0;
+					AddWndToPtrn();
+					state = State::Waiting;
+					lockedOnWin = true; // Adds short delay before showing new pattern.
+				}
 			}
 		}
 		else

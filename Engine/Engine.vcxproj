@@ -254,6 +254,7 @@
     <Image Include="Fonts\DejaVuSansMonoBold28x54.bmp" />
     <Image Include="Sprites\SuperSimonIcon48x48.ico" />
     <Image Include="Sprites\SuperSimonTitle263x89.bmp" />
+    <Image Include="Sprites\Victory411x301.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\title.wav" />

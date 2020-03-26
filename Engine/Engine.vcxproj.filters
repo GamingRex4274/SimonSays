@@ -191,6 +191,9 @@
     <Image Include="Sprites\SuperSimonIcon48x48.ico">
       <Filter>Sprites</Filter>
     </Image>
+    <Image Include="Sprites\Victory411x301.bmp">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\title.wav">

@@ -14,7 +14,8 @@ public:
 	{
 		Waiting,
 		Playing,
-		GameOver
+		GameOver,
+		Win
 	};
 private:
 	class Window
@@ -63,7 +64,7 @@ private:
 	int height;
 	int windowSize; // Dimensions of each window.
 	int wndBevelSize; // Size of shading.
-	static constexpr int nMaxRounds = 15;
+	static constexpr int nMaxRounds = 3;
 	Vei2 topLeft;
 	Window* grid = nullptr;
 	State state = State::Waiting;
