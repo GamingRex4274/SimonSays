@@ -55,11 +55,31 @@ void Game::UpdateModel()
 			soundPlaying = false;
 		}
 
-		if (pGrid->GetState() != Grid::State::GameOver)
+		switch(pGrid->GetState())
 		{
-			const std::string score = std::to_string(pGrid->GetScore());
-			fullScore = roundHeaderTxt + score;
+		case Grid::State::Win:
+		case Grid::State::GameOver:
+			if (highScore < pGrid->GetScore())
+			{
+				highScore = pGrid->GetScore();
+				std::ofstream bestScore("score.dat", std::ios::binary);
+				bestScore.write(reinterpret_cast<char*>(&highScore), sizeof(highScore));
+			}
 
+			while (!wnd.mouse.IsEmpty())
+			{
+				const auto e = wnd.mouse.Read();
+				if (e.GetType() == Mouse::Event::Type::LPress)
+				{
+					DestroyGrid();
+					curWaitTime = 0.0f;
+					cooldownOn = false;
+					showingWaitText = true;
+					onTitleScreen = true;
+				}
+			}
+			break;
+		default:
 			if (cooldownOn)
 			{
 				curWaitTime += dt;
@@ -95,28 +115,10 @@ void Game::UpdateModel()
 				pGrid->ShowPtrnSelection(cooldownOn);
 				cooldownOn = true;
 			}
-		}
-		else
-		{
-			if (highScore < pGrid->GetScore())
-			{
-				highScore = pGrid->GetScore();
-				std::ofstream bestScore("score.dat", std::ios::binary);
-				bestScore.write(reinterpret_cast<char*>(&highScore), sizeof(highScore));
-			}
 
-			while (!wnd.mouse.IsEmpty())
-			{
-				const auto e = wnd.mouse.Read();
-				if (e.GetType() == Mouse::Event::Type::LPress)
-				{
-					DestroyGrid();
-					curWaitTime = 0.0f;
-					cooldownOn = false;
-					showingWaitText = true;
-					onTitleScreen = true;
-				}
-			}
+			const std::string score = std::to_string(pGrid->GetScore());
+			fullScore = roundHeaderTxt + score;
+			break;
 		}
 	}
 	else
@@ -200,6 +202,7 @@ void Game::ComposeFrame()
 			break;
 		case Grid::State::Win:
 			smallFont.DrawText(fullScore, Vei2((Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
+			smallFont.DrawText(prompt2Txt, Vei2((Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
 			gfx.DrawSprite((Graphics::ScreenWidth - 411) / 2, (Graphics::ScreenHeight - 301) / 2, victory, Colors::Black);
 		}
 	}
