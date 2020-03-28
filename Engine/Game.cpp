@@ -158,15 +158,15 @@ void Game::UpdateModel()
 			const SelectionMenu::Size s = menu.ProcessMouse(e);
 			switch (s)
 			{
-			case SelectionMenu::Size::Small:
+			case SelectionMenu::Size::Small: // Total score: 1450
 				CreateGrid(2, 2);
 				onTitleScreen = false;
 				break;
-			case SelectionMenu::Size::Medium:
+			case SelectionMenu::Size::Medium: // Total score: 1850
 				CreateGrid(3, 3);
 				onTitleScreen = false;
 				break;
-			case SelectionMenu::Size::Large:
+			case SelectionMenu::Size::Large: // Total score: 2650
 				CreateGrid(4, 4);
 				onTitleScreen = false;
 				break;
