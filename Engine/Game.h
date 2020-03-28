@@ -74,7 +74,7 @@ private:
 	const std::string roundHeaderTxt = "Score: ";
 	const std::string prompt2Txt = "LEFT-CLICK to return to title screen.";
 	std::string fullScore;
-	SelectionMenu menu = { Vei2((Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6), boldFont };
+	SelectionMenu menu = { {(Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6}, boldFont };
 	bool onTitleScreen = true;
 	bool sndTitlePlaying = false;
 	bool sndVictoryPlaying = false;

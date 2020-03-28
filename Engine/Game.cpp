@@ -137,7 +137,7 @@ void Game::UpdateModel()
 
 		if (!sndTitlePlaying)
 		{
-			sndTitle.Play();
+			sndTitle.Play(1.0f, 0.5f);
 			sndTitlePlaying = true;
 		}
 
@@ -196,33 +196,33 @@ void Game::ComposeFrame()
 		case Grid::State::Waiting:
 			if (showingWaitText)
 			{
-				bigFont.DrawText(waitTxt, Vei2((Graphics::ScreenWidth - (int(waitTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), { 0,135,255 }, gfx);
+				bigFont.DrawText(waitTxt, { (Graphics::ScreenWidth - (int(waitTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2 }, { 0,135,255 }, gfx);
 			}
 			smallFont.DrawText(fullScore, { 0, 0 }, Colors::White, gfx);
 			pGrid->Draw(gfx);
 			break;
 		case Grid::State::Playing:
-			bigFont.DrawText(repeatTxt, Vei2((Graphics::ScreenWidth - (int(repeatTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2), Colors::Red, gfx);
+			bigFont.DrawText(repeatTxt, { (Graphics::ScreenWidth - (int(repeatTxt.size()) * bigFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() / 2 }, Colors::Red, gfx);
 			smallFont.DrawText(fullScore, { 0, 0 }, Colors::White, gfx);
 			pGrid->Draw(gfx);
 			break;
 		case Grid::State::GameOver:
-			boldFont.DrawText(gameOverTxt, Vei2((Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4), Colors::White, gfx);
-			smallFont.DrawText(fullScore, Vei2((Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
-			smallFont.DrawText(prompt2Txt, Vei2((Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
+			boldFont.DrawText(gameOverTxt, { (Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4 }, Colors::White, gfx);
+			smallFont.DrawText(fullScore, { (Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5 }, Colors::White, gfx);
+			smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
 			pGrid->Draw(gfx);
 			break;
 		case Grid::State::Win:
-			smallFont.DrawText(fullScore, Vei2((Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5), Colors::White, gfx);
-			smallFont.DrawText(prompt2Txt, Vei2((Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::Yellow, gfx);
+			smallFont.DrawText(fullScore, { (Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5 }, Colors::White, gfx);
+			smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
 			gfx.DrawSprite((Graphics::ScreenWidth - 411) / 2, (Graphics::ScreenHeight - 301) / 2, victory, Colors::Black);
 		}
 	}
 	else
 	{
 		gfx.DrawSprite((Graphics::ScreenWidth - 263) / 2, (Graphics::ScreenHeight - 89) / 4, title, Colors::Black);
-		smallFont.DrawText(prompt1Txt, Vei2((Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5), Colors::Red, gfx);
-		smallFont.DrawText(noticeTxt, Vei2((Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2), Colors::White, gfx);
+		smallFont.DrawText(prompt1Txt, { (Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5 }, Colors::Red, gfx);
+		smallFont.DrawText(noticeTxt, { (Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::White, gfx);
 		smallFont.DrawText(highScoreTxt + std::to_string(highScore), { 0, 0 }, Colors::White, gfx);
 		menu.Draw(gfx);
 	}
