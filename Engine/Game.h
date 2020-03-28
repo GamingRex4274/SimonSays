@@ -66,7 +66,7 @@ private:
 	Font bigFont = "Fonts\\Consolas27x50.bmp";
 	Font smallFont = "Fonts\\Consolas11x21.bmp";
 	const std::string prompt1Txt = "Choose grid size:";
-	const std::string noticeTxt = "(C) 2020 Sebastendo. This is a Beta version.";
+	const std::string noticeTxt = "(C) 2020 Sebastendo.";
 	const std::string highScoreTxt = "Highest Score: ";
 	const std::string waitTxt = "Watch carefully...";
 	const std::string repeatTxt = "REPEAT!";

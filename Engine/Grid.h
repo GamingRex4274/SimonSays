@@ -64,7 +64,7 @@ private:
 	int height;
 	int windowSize; // Dimensions of each window.
 	int wndBevelSize; // Size of shading.
-	static constexpr int nMaxRounds = 3;
+	static constexpr int nMaxRounds = 20;
 	Vei2 topLeft;
 	Window* grid = nullptr;
 	State state = State::Waiting;
