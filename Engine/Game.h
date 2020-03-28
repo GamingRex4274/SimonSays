@@ -51,6 +51,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Sound sndTitle;
+	Sound sndVictory;
 	FrameTimer ft;
 	Grid* pGrid = nullptr;
 	int highScore = 0;
@@ -75,6 +76,7 @@ private:
 	std::string fullScore;
 	SelectionMenu menu = { Vei2((Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6), boldFont };
 	bool onTitleScreen = true;
-	bool soundPlaying = false;
+	bool sndTitlePlaying = false;
+	bool sndVictoryPlaying = false;
 	/********************************/
 };

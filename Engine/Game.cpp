@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	sndTitle(L"Sounds\\title.wav", 1.567f, 12.522f)
+	sndTitle(L"Sounds\\title.wav", 1.567f, 12.522f),
+	sndVictory(L"Sounds\\victory.wav", 4.325f, 22.727f)
 {
 }
 
@@ -49,15 +50,20 @@ void Game::UpdateModel()
 
 	if (!onTitleScreen)
 	{
-		if (soundPlaying)
+		if (sndTitlePlaying)
 		{
 			sndTitle.StopAll();
-			soundPlaying = false;
+			sndTitlePlaying = false;
 		}
 
 		switch(pGrid->GetState())
 		{
 		case Grid::State::Win:
+			if (!sndVictoryPlaying)
+			{
+				sndVictory.Play();
+				sndVictoryPlaying = true;
+			}
 		case Grid::State::GameOver:
 			if (highScore < pGrid->GetScore())
 			{
@@ -123,10 +129,16 @@ void Game::UpdateModel()
 	}
 	else
 	{
-		if (!soundPlaying)
+		if (sndVictoryPlaying)
+		{
+			sndVictory.StopAll();
+			sndVictoryPlaying = false;
+		}
+
+		if (!sndTitlePlaying)
 		{
 			sndTitle.Play();
-			soundPlaying = true;
+			sndTitlePlaying = true;
 		}
 
 		std::ifstream inBestScore("score.dat", std::ios::binary);

@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\title.wav" />
+    <Media Include="Sounds\victory.wav" />
     <Media Include="Sounds\window.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

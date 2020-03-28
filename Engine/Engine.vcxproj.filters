@@ -202,5 +202,8 @@
     <Media Include="Sounds\window.wav">
       <Filter>Sounds</Filter>
     </Media>
+    <Media Include="Sounds\victory.wav">
+      <Filter>Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>
