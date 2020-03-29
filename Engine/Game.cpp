@@ -222,7 +222,7 @@ void Game::ComposeFrame()
 	{
 		gfx.DrawSprite((Graphics::ScreenWidth - 263) / 2, (Graphics::ScreenHeight - 89) / 4, title, Colors::Black);
 		smallFont.DrawText(prompt1Txt, { (Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5 }, Colors::Red, gfx);
-		smallFont.DrawText(noticeTxt, { (Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::White, gfx);
+		smallFont.DrawText(noticeTxt, { (Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() }, Colors::White, gfx);
 		smallFont.DrawText(highScoreTxt + std::to_string(highScore), { 0, 0 }, Colors::White, gfx);
 		menu.Draw(gfx);
 	}
