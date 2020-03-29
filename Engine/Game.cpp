@@ -50,6 +50,25 @@ void Game::UpdateModel()
 
 	if (!onTitleScreen)
 	{
+		if (cooldownOn)
+		{
+			curWaitTime += dt;
+			if (curWaitTime > selectWaitTime)
+			{
+				switch (pGrid->GetState())
+				{
+				case Grid::State::Waiting:
+				case Grid::State::Playing:
+					pGrid->ResetWindows();
+					break;
+				}
+
+				curWaitTime = 0.0f;
+				cooldownOn = false;
+				showingWaitText = true;
+			}
+		}
+
 		if (sndTitlePlaying)
 		{
 			sndTitle.StopAll();
@@ -75,7 +94,7 @@ void Game::UpdateModel()
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
-				if (e.GetType() == Mouse::Event::Type::LPress)
+				if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
 				{
 					DestroyGrid();
 					curWaitTime = 0.0f;
@@ -86,18 +105,6 @@ void Game::UpdateModel()
 			}
 			break;
 		default:
-			if (cooldownOn)
-			{
-				curWaitTime += dt;
-				if (curWaitTime > selectWaitTime)
-				{
-					pGrid->ResetWindows();
-					curWaitTime = 0.0f;
-					cooldownOn = false;
-					showingWaitText = true;
-				}
-			}
-
 			if (pGrid->GetState() == Grid::State::Playing)
 			{
 				showingWaitText = false;
@@ -209,12 +216,18 @@ void Game::ComposeFrame()
 		case Grid::State::GameOver:
 			boldFont.DrawText(gameOverTxt, { (Graphics::ScreenWidth - (int(gameOverTxt.size()) * boldFont.GetGlyphWidth())) / 2, boldFont.GetGlyphHeight() / 4 }, Colors::White, gfx);
 			smallFont.DrawText(fullScore, { (Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5 }, Colors::White, gfx);
-			smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
+			if (!cooldownOn)
+			{
+				smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
+			}
 			pGrid->Draw(gfx);
 			break;
 		case Grid::State::Win:
 			smallFont.DrawText(fullScore, { (Graphics::ScreenWidth - (int(fullScore.size()) * smallFont.GetGlyphWidth())) / 2, (boldFont.GetGlyphHeight() / 4) * 5 }, Colors::White, gfx);
-			smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
+			if (!cooldownOn)
+			{
+				smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
+			}
 			gfx.DrawSprite((Graphics::ScreenWidth - 411) / 2, (Graphics::ScreenHeight - 301) / 2, victory, Colors::Black);
 		}
 	}
