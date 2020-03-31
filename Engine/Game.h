@@ -44,6 +44,7 @@ private:
 	/*  User Functions              */
 	void CreateGrid(int width, int height);
 	void DestroyGrid();
+	void ResetGame();
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -55,7 +56,7 @@ private:
 	FrameTimer ft;
 	Grid* pGrid = nullptr;
 	int highScore = 0;
-	static constexpr float selectWaitTime = 0.5f;
+	float waitTime = 0.5f;
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
 	bool showingWaitText = true;

@@ -53,7 +53,7 @@ void Game::UpdateModel()
 		if (cooldownOn)
 		{
 			curWaitTime += dt;
-			if (curWaitTime > selectWaitTime)
+			if (curWaitTime > waitTime)
 			{
 				switch (pGrid->GetState())
 				{
@@ -84,6 +84,7 @@ void Game::UpdateModel()
 				sndVictoryPlaying = true;
 			}
 		case Grid::State::GameOver:
+			waitTime = 1.0f;
 			if (highScore < pGrid->GetScore())
 			{
 				highScore = pGrid->GetScore();
@@ -96,11 +97,7 @@ void Game::UpdateModel()
 				const auto e = wnd.mouse.Read();
 				if (e.GetType() == Mouse::Event::Type::LPress && !cooldownOn)
 				{
-					DestroyGrid();
-					curWaitTime = 0.0f;
-					cooldownOn = false;
-					showingWaitText = true;
-					onTitleScreen = true;
+					ResetGame();
 				}
 			}
 			break;
@@ -169,7 +166,7 @@ void Game::UpdateModel()
 				CreateGrid(2, 2);
 				onTitleScreen = false;
 				break;
-			case SelectionMenu::Size::Medium: // Total score: 1850
+			case SelectionMenu::Size::Medium: // Total score: 1950
 				CreateGrid(3, 3);
 				onTitleScreen = false;
 				break;
@@ -192,6 +189,16 @@ void Game::DestroyGrid()
 {
 	delete pGrid;
 	pGrid = nullptr;
+}
+
+void Game::ResetGame()
+{
+	DestroyGrid();
+	curWaitTime = 0.0f;
+	waitTime = 0.5f;
+	cooldownOn = false;
+	showingWaitText = true;
+	onTitleScreen = true;
 }
 
 void Game::ComposeFrame()
