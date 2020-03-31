@@ -248,10 +248,6 @@
     <Image Include="Fonts\Consolas27x50.bmp" />
     <Image Include="Fonts\ConsolasBold11x21.bmp" />
     <Image Include="Fonts\ConsolasBold27x50.bmp" />
-    <Image Include="Fonts\DejaVuSansMono11x22.bmp" />
-    <Image Include="Fonts\DejaVuSansMono28x54.bmp" />
-    <Image Include="Fonts\DejaVuSansMonoBold11x22.bmp" />
-    <Image Include="Fonts\DejaVuSansMonoBold28x54.bmp" />
     <Image Include="Sprites\SuperSimonIcon48x48.ico" />
     <Image Include="Sprites\SuperSimonTitle263x89.bmp" />
     <Image Include="Sprites\Victory411x301.bmp" />

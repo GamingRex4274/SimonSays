@@ -161,18 +161,6 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Fonts\DejaVuSansMono11x22.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\DejaVuSansMono28x54.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\DejaVuSansMonoBold11x22.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
-    <Image Include="Fonts\DejaVuSansMonoBold28x54.bmp">
-      <Filter>Fonts</Filter>
-    </Image>
     <Image Include="Fonts\Consolas11x21.bmp">
       <Filter>Fonts</Filter>
     </Image>
