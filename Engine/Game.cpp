@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include <fstream>
+#include "SpriteEffect.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -235,12 +236,12 @@ void Game::ComposeFrame()
 			{
 				smallFont.DrawText(prompt2Txt, { (Graphics::ScreenWidth - (int(prompt2Txt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() * 2 }, Colors::Yellow, gfx);
 			}
-			gfx.DrawSprite((Graphics::ScreenWidth - 411) / 2, (Graphics::ScreenHeight - 301) / 2, victory, Colors::Black);
+			gfx.DrawSprite((Graphics::ScreenWidth - 411) / 2, (Graphics::ScreenHeight - 301) / 2, victory, SpriteEffect::Chroma{ Colors::Black });
 		}
 	}
 	else
 	{
-		gfx.DrawSprite((Graphics::ScreenWidth - 263) / 2, (Graphics::ScreenHeight - 89) / 4, title, Colors::Black);
+		gfx.DrawSprite((Graphics::ScreenWidth - 263) / 2, (Graphics::ScreenHeight - 89) / 4, title, SpriteEffect::Chroma{ Colors::Black });
 		smallFont.DrawText(prompt1Txt, { (Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5 }, Colors::Red, gfx);
 		smallFont.DrawText(noticeTxt, { (Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() }, Colors::White, gfx);
 		smallFont.DrawText(highScoreTxt + std::to_string(highScore), { 0, 0 }, Colors::White, gfx);
