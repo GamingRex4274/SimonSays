@@ -60,7 +60,7 @@ private:
 	float curWaitTime = 0.0f;
 	bool cooldownOn = false;
 	bool showingWaitText = true;
-	Vei2 mousePos;
+	Vei2 mousePos = { 0, 0 };
 	const Surface title = "Sprites\\SuperSimonTitle263x89.bmp";
 	const Surface victory = "Sprites\\Victory411x301.bmp";
 	Font boldFont = "Fonts\\ConsolasBold27x50.bmp";
