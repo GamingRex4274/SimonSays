@@ -32,11 +32,6 @@ Game::Game( MainWindow& wnd )
 {
 }
 
-Game::~Game()
-{
-	DestroyGrid();
-}
-
 void Game::Go()
 {
 	gfx.BeginFrame();
@@ -182,19 +177,13 @@ void Game::UpdateModel()
 
 void Game::CreateGrid(int width, int height)
 {
-	pGrid = new Grid(gfx.GetRect().GetCenter(), width, height);
+	pGrid = std::make_unique<Grid>(gfx.GetRect().GetCenter(), width, height);
 	pGrid->AddWndToPtrn();
-}
-
-void Game::DestroyGrid()
-{
-	delete pGrid;
-	pGrid = nullptr;
 }
 
 void Game::ResetGame()
 {
-	DestroyGrid();
+	pGrid.reset();
 	curWaitTime = 0.0f;
 	waitTime = 0.5f;
 	cooldownOn = false;

@@ -5,6 +5,7 @@
 #include "Beveler.h"
 #include <random>
 #include <vector>
+#include <memory>
 #include "Sound.h"
 
 class Grid
@@ -43,9 +44,6 @@ private:
 	};
 public:
 	Grid(const Vei2& center, int width, int height);
-	~Grid();
-	Grid(const Grid&) = delete;
-	Grid& operator=(const Grid&) = delete;
 	void Draw(Graphics& gfx);
 	void AddWndToPtrn();
 	void ResetWindows();
@@ -66,7 +64,7 @@ private:
 	int wndBevelSize; // Size of shading.
 	static constexpr int nMaxRounds = 20;
 	Vei2 topLeft;
-	Window* grid = nullptr;
+	std::unique_ptr<Window[]> grid;
 	State state = State::Waiting;
 	std::vector<int> wndPattern;
 	int ptrnIndex = 0;

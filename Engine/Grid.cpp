@@ -64,7 +64,7 @@ Grid::Grid(const Vei2& center, int width, int height)
 	height(height),
 	windowSize((200 / width) + (200 / height)),
 	wndBevelSize(windowSize / 16),
-	grid(new Window[width * height]),
+	grid(std::make_unique<Window[]>(width * height)),
 	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
 	float sndPitch = 0.84f;
@@ -77,12 +77,6 @@ Grid::Grid(const Vei2& center, int width, int height)
 			sndPitch *= 1.06f;
 		}
 	}
-}
-
-Grid::~Grid()
-{
-	delete[] grid;
-	grid = nullptr;
 }
 
 void Grid::Draw(Graphics& gfx)

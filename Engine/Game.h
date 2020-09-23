@@ -33,7 +33,6 @@ class Game
 {
 public:
 	Game( class MainWindow& wnd );
-	~Game();
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
@@ -43,7 +42,6 @@ private:
 	/********************************/
 	/*  User Functions              */
 	void CreateGrid(int width, int height);
-	void DestroyGrid();
 	void ResetGame();
 	/********************************/
 private:
@@ -54,7 +52,7 @@ private:
 	Sound sndTitle;
 	Sound sndVictory;
 	FrameTimer ft;
-	Grid* pGrid = nullptr;
+	std::unique_ptr<Grid> pGrid;
 	int highScore = 0;
 	float waitTime = 0.5f;
 	float curWaitTime = 0.0f;
