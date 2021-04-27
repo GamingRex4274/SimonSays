@@ -176,7 +176,7 @@ void Grid::ProcessSelection(const Vei2& gridPos)
 			score += 5;
 			if (ptrnIndex > curRound)
 			{
-				score += 10 * (width * height) / 2;
+				score += width * height * 5;
 				if (++curRound >= nMaxRounds)
 				{
 					state = State::Win;
