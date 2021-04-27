@@ -68,7 +68,7 @@ Grid::Grid(const Vei2& center, int width, int height, bool freeplayOn)
 	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
 	// Initialize round number depending on freeplay mode.
-	nMaxRounds = freeplayOn ? std::numeric_limits<int>::max() : 2;
+	nMaxRounds = freeplayOn ? std::numeric_limits<int>::max() : 20;
 	float sndPitch = 0.84f;
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{

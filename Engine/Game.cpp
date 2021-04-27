@@ -243,6 +243,8 @@ void Game::ComposeFrame()
 		smallFont.DrawText(prompt1Txt, { (Graphics::ScreenWidth - (int(prompt1Txt.size()) * smallFont.GetGlyphWidth())) / 2, bigFont.GetGlyphHeight() * 5 }, Colors::Red, gfx);
 		smallFont.DrawText(noticeTxt, { (Graphics::ScreenWidth - (int(noticeTxt.size()) * smallFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - smallFont.GetGlyphHeight() }, Colors::White, gfx);
 		smallFont.DrawText(highScoreTxt + std::to_string(highScore), { 0, 0 }, Colors::White, gfx);
+		const std::string option = freeplayOn ? "ON" : "OFF";
+		smallFont.DrawText("[F]reeplay: " + option, { 0, Graphics::ScreenHeight - smallFont.GetGlyphHeight() }, Colors::Yellow, gfx);
 		menu.Draw(gfx);
 	}
 }
