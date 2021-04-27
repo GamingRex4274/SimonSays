@@ -43,7 +43,7 @@ private:
 		static constexpr int padding = 5; // Space between windows.
 	};
 public:
-	Grid(const Vei2& center, int width, int height);
+	Grid(const Vei2& center, int width, int height, bool freeplayOn = false);
 	void Draw(Graphics& gfx);
 	void AddWndToPtrn();
 	void ResetWindows();
@@ -62,7 +62,7 @@ private:
 	int height;
 	int windowSize; // Dimensions of each window.
 	int wndBevelSize; // Size of shading.
-	static constexpr int nMaxRounds = 20;
+	int nMaxRounds;
 	Vei2 topLeft;
 	std::unique_ptr<Window[]> grid;
 	State state = State::Waiting;

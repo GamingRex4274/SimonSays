@@ -58,7 +58,7 @@ bool Grid::Window::IsSelected() const
 	return state == State::Selected;
 }
 
-Grid::Grid(const Vei2& center, int width, int height)
+Grid::Grid(const Vei2& center, int width, int height, bool freeplayOn)
 	:
 	width(width),
 	height(height),
@@ -67,6 +67,8 @@ Grid::Grid(const Vei2& center, int width, int height)
 	grid(std::make_unique<Window[]>(width * height)),
 	topLeft(center - Vei2(width, height) * windowSize / 2) // Center of screen.
 {
+	// Initialize round number depending on freeplay mode.
+	nMaxRounds = freeplayOn ? std::numeric_limits<int>::max() : 2;
 	float sndPitch = 0.84f;
 	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
 	{

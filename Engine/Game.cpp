@@ -151,6 +151,15 @@ void Game::UpdateModel()
 			highScore = 0;
 		}
 
+		while (!wnd.kbd.KeyIsEmpty())
+		{
+			const auto e = wnd.kbd.ReadKey();
+			if (e.IsPress() && e.GetCode() == 'F')
+			{
+				freeplayOn = !freeplayOn;
+			}
+		}
+
 		while (!wnd.mouse.IsEmpty())
 		{
 			const auto e = wnd.mouse.Read();
@@ -177,7 +186,7 @@ void Game::UpdateModel()
 
 void Game::CreateGrid(int width, int height)
 {
-	pGrid = std::make_unique<Grid>(gfx.GetRect().GetCenter(), width, height);
+	pGrid = std::make_unique<Grid>(gfx.GetRect().GetCenter(), width, height, freeplayOn);
 	pGrid->AddWndToPtrn();
 }
 

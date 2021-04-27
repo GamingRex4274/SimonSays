@@ -75,6 +75,7 @@ private:
 	std::string fullScore;
 	SelectionMenu menu = { {(Graphics::ScreenWidth - (6 * boldFont.GetGlyphWidth())) / 2, Graphics::ScreenHeight - boldFont.GetGlyphHeight() * 6}, boldFont };
 	bool onTitleScreen = true;
+	bool freeplayOn = false;
 	bool sndTitlePlaying = false;
 	bool sndVictoryPlaying = false;
 	/********************************/
