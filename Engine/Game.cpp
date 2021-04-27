@@ -76,7 +76,7 @@ void Game::UpdateModel()
 		case Grid::State::Win:
 			if (!sndVictoryPlaying)
 			{
-				sndVictory.Play();
+				sndVictory.Play(1.0f, 0.125f);
 				sndVictoryPlaying = true;
 			}
 		case Grid::State::GameOver:
@@ -137,7 +137,7 @@ void Game::UpdateModel()
 
 		if (!sndTitlePlaying)
 		{
-			sndTitle.Play(1.0f, 0.5f);
+			sndTitle.Play(1.0f, 0.125f);
 			sndTitlePlaying = true;
 		}
 

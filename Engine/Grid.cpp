@@ -45,7 +45,7 @@ void Grid::Window::ToggleSelect()
 	{
 	case State::Unselected:
 		state = State::Selected;
-		sndSelect.Play(sndPitch);
+		sndSelect.Play(sndPitch, 0.125f);
 		break;
 	case State::Selected:
 		state = State::Unselected;
